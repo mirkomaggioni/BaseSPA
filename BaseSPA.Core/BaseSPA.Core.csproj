@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContextFactory.cs" />
     <Compile Include="Migrations\201707051113471_migrazione-iniziale.cs" />
     <Compile Include="Migrations\201707051113471_migrazione-iniziale.Designer.cs">
       <DependentUpon>201707051113471_migrazione-iniziale.cs</DependentUpon>
