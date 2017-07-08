@@ -1,5 +1,5 @@
-# Blog
-Base SPA
+# Base SPA
+Documentation
 
 # Web Api 2 Web services
 

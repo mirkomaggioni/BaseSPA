@@ -22,12 +22,12 @@ namespace BaseSPA.Web.Controllers.Api
 		}
 
 		// GET: api/Blogs/5
-        [ResponseType(typeof(Blog))]
-        public IHttpActionResult GetBlog(Guid id)
+		[HttpGet]
+        public async Task<IHttpActionResult> GetBlog(Guid id)
 		{
 	        using (var db = ContextFactory.GetContext<Context>(readOnly: true))
 	        {
-		        var blog = db.Blogs.Find(id);
+		        var blog = await db.Blogs.FindAsync(id);
 		        if (blog == null)
 		        {
 			        return NotFound();
@@ -38,18 +38,19 @@ namespace BaseSPA.Web.Controllers.Api
         }
 
         // PUT: api/Blogs/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutBlog(Guid id, Blog blog)
+		[HttpPut]
+        public async Task<IHttpActionResult> PutBlog([FromBody] Blog blog)
         {
 	        using (var db = ContextFactory.GetContext<Context>())
 	        {
-		        var entity = db.Blogs.Find(id);
+		        var entity = await db.Blogs.FindAsync(blog.Id);
 		        if (entity == null)
 		        {
 			        return NotFound();
 		        }
 
 		        entity.Url = blog.Url;
+				db.Entry(entity).State = EntityState.Modified;
 		        await db.SaveChangesAsync();
 
 				return StatusCode(HttpStatusCode.OK);
@@ -57,8 +58,8 @@ namespace BaseSPA.Web.Controllers.Api
         }
 
         // POST: api/Blogs
-        [ResponseType(typeof(Blog))]
-        public async Task<IHttpActionResult> PostBlog(Blog blog)
+		[HttpPost]
+        public async Task<IHttpActionResult> PostBlog([FromBody] Blog blog)
         {
 	        using (var db = ContextFactory.GetContext<Context>())
 	        {
@@ -70,12 +71,12 @@ namespace BaseSPA.Web.Controllers.Api
         }
 
         // DELETE: api/Blogs/5
-        [ResponseType(typeof(Blog))]
+		[HttpDelete]
         public async Task<IHttpActionResult> DeleteBlog(Guid id)
         {
 	        using (var db = ContextFactory.GetContext<Context>())
 	        {
-				var entity = db.Blogs.Find(id);
+				var entity = await db.Blogs.FindAsync(id);
 		        if (entity == null)
 		        {
 			        return NotFound();
