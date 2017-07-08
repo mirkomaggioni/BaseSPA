@@ -17,6 +17,9 @@ Microsoft.Owin.Host.SystemWeb
 
 Add a new web api Blogs, start the project and check with a client like postman the url api/blogs
 
+Add a new web api Posts, with two get with an id as parameter, the first one is to get all post of a blog, the second one is
+to get a single post
+Add a route attribute to GetBlogPosts action
 
 
 
