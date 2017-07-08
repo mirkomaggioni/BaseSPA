@@ -52,6 +52,10 @@
     <Compile Include="Migrations\201707051113471_migrazione-iniziale.Designer.cs">
       <DependentUpon>201707051113471_migrazione-iniziale.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707081255336_aggiunta-attributo-chiave-primaria.cs" />
+    <Compile Include="Migrations\201707081255336_aggiunta-attributo-chiave-primaria.Designer.cs">
+      <DependentUpon>201707081255336_aggiunta-attributo-chiave-primaria.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\Context.cs" />
@@ -65,6 +69,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201707051113471_migrazione-iniziale.resx">
       <DependentUpon>201707051113471_migrazione-iniziale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707081255336_aggiunta-attributo-chiave-primaria.resx">
+      <DependentUpon>201707081255336_aggiunta-attributo-chiave-primaria.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
