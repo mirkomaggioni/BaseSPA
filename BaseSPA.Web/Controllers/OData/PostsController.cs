@@ -1,67 +1,51 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.ModelBinding;
 using System.Web.Http.OData;
-using System.Web.Http.OData.Routing;
 using BaseSPA.Core.Models;
 
 namespace BaseSPA.Web.Controllers.OData
 {
     public class PostsController : ODataController
     {
-        private Context db = new Context();
+        private readonly Context _db = new Context();
 
         // GET: odata/Posts
         [EnableQuery]
         public IQueryable<Post> GetPosts()
         {
-            return db.Posts;
+            return _db.Posts;
         }
 
         // GET: odata/Posts(5)
         [EnableQuery]
         public SingleResult<Post> GetPost([FromODataUri] Guid key)
         {
-            return SingleResult.Create(db.Posts.Where(post => post.Id == key));
+            return SingleResult.Create(_db.Posts.Where(post => post.Id == key));
         }
 
         // PUT: odata/Posts(5)
-        public async Task<IHttpActionResult> Put([FromODataUri] Guid key, Delta<Post> patch)
+        public async Task<IHttpActionResult> Put(Post post)
         {
-            Validate(patch.GetEntity());
-
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            Post post = await db.Posts.FindAsync(key);
-            if (post == null)
+            var entity = await _db.Posts.FindAsync(post);
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            patch.Put(post);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PostExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+	        entity.Title = post.Title;
+	        entity.Content = post.Content;
+			_db.Entry(entity).State = EntityState.Modified;
+	        await _db.SaveChangesAsync();
 
             return Updated(post);
         }
@@ -74,76 +58,23 @@ namespace BaseSPA.Web.Controllers.OData
                 return BadRequest(ModelState);
             }
 
-            db.Posts.Add(post);
+            _db.Posts.Add(post);
+	        await _db.SaveChangesAsync();
 
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (PostExists(post.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Created(post);
-        }
-
-        // PATCH: odata/Posts(5)
-        [AcceptVerbs("PATCH", "MERGE")]
-        public async Task<IHttpActionResult> Patch([FromODataUri] Guid key, Delta<Post> patch)
-        {
-            Validate(patch.GetEntity());
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Post post = await db.Posts.FindAsync(key);
-            if (post == null)
-            {
-                return NotFound();
-            }
-
-            patch.Patch(post);
-
-            try
-            {
-                await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PostExists(key))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return Updated(post);
+	        return Created(post);
         }
 
         // DELETE: odata/Posts(5)
         public async Task<IHttpActionResult> Delete([FromODataUri] Guid key)
         {
-            Post post = await db.Posts.FindAsync(key);
+            Post post = await _db.Posts.FindAsync(key);
             if (post == null)
             {
                 return NotFound();
             }
 
-            db.Posts.Remove(post);
-            await db.SaveChangesAsync();
+            _db.Posts.Remove(post);
+            await _db.SaveChangesAsync();
 
             return StatusCode(HttpStatusCode.NoContent);
         }
@@ -152,21 +83,16 @@ namespace BaseSPA.Web.Controllers.OData
         [EnableQuery]
         public SingleResult<Blog> GetBlog([FromODataUri] Guid key)
         {
-            return SingleResult.Create(db.Posts.Where(m => m.Id == key).Select(m => m.Blog));
+            return SingleResult.Create(_db.Posts.Where(m => m.Id == key).Select(m => m.Blog));
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
-        }
-
-        private bool PostExists(Guid key)
-        {
-            return db.Posts.Count(e => e.Id == key) > 0;
         }
     }
 }
