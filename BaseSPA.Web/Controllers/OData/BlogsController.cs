@@ -24,40 +24,53 @@ namespace BaseSPA.Web.Controllers.OData
 
 		// GET: odata/Blogs(5)
 		[EnableQuery]
-        public SingleResult<Blog> GetBlog([FromODataUri] Guid id)
+        public SingleResult<Blog> GetBlog([FromODataUri] Guid key)
         {
-			return SingleResult.Create(_db.Blogs.Where(b => b.Id == id));
+			return SingleResult.Create(_db.Blogs.Where(b => b.Id == key));
 		}
 
-        // PUT: odata/Blogs(5)
-        public async Task<IHttpActionResult> Put(Blog blog)
+		// PATCH: odata/Blogs1(5)
+	    [AcceptVerbs("PATCH", "MERGE")]
+	    public async Task<IHttpActionResult> Patch([FromODataUri] Guid key, Delta<Blog> patch)
+	    {
+		    Validate(patch.GetEntity());
+
+		    if (!ModelState.IsValid)
+		    {
+			    return BadRequest(ModelState);
+		    }
+
+		    var blog = await _db.Blogs.FindAsync(key);
+		    if (blog == null)
+		    {
+			    return NotFound();
+		    }
+
+		    patch.Patch(blog);
+
+		    await _db.SaveChangesAsync();
+
+		    return Updated(blog);
+	    }
+
+		// POST: odata/Blogs
+		public async Task<IHttpActionResult> Post(Blog blog)
         {
-			var entity = await _db.Blogs.FindAsync(blog.Id);
-	        if (entity == null)
+	        if (!ModelState.IsValid)
 	        {
-		        return NotFound();
+		        return BadRequest(ModelState);
 	        }
 
-	        entity.Url = blog.Url;
-	        _db.Entry(entity).State = EntityState.Modified;
-	        await _db.SaveChangesAsync();
-
-	        return Updated(entity);
-		}
-
-        // POST: odata/Blogs
-        public async Task<IHttpActionResult> Post(Blog blog)
-        {
-	        _db.Blogs.Add(blog);
+			_db.Blogs.Add(blog);
 	        await _db.SaveChangesAsync();
 
 	        return Created(blog);
 		}
 
         // DELETE: odata/Blogs(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] Guid id)
+        public async Task<IHttpActionResult> Delete([FromODataUri] Guid key)
         {
-	        var entity = await _db.Blogs.FindAsync(id);
+	        var entity = await _db.Blogs.FindAsync(key);
 	        if (entity == null)
 	        {
 		        return NotFound();
@@ -77,5 +90,5 @@ namespace BaseSPA.Web.Controllers.OData
 		    }
 			base.Dispose(disposing);
 	    }
-    }
+	}
 }

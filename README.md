@@ -21,6 +21,18 @@ Add a new web api Posts, with two get with an id as parameter, the first one is 
 to get a single post
 Add a route attribute to GetBlogPosts action
 
+# OData
+
+Create Blogs ODataController and Posts ODataController, remove useless ApiController
+Add the route configuration in Startup.cs file; the configuration is specified in the ODataController if it was created with scaffolding
+With postman check some calls like these:
+
+/odata/$metadata
+/odata/Blogs
+/odata/Blogs(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c8')
+/odata/Posts
+/odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog
+/odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog&$select=Title,Content,Blog/Url
 
 
 
