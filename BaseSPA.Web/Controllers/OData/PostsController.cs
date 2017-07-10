@@ -6,16 +6,22 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.OData;
+using BaseSPA.Core;
 using BaseSPA.Core.Models;
 
 namespace BaseSPA.Web.Controllers.OData
 {
     public class PostsController : ODataController
     {
-        private readonly Context _db = new Context();
+        private readonly Context _db;
 
-        // GET: odata/Posts
-        [EnableQuery]
+	    public PostsController(ContextFactory contextFactory)
+	    {
+		    _db = contextFactory.GetContext<Context>();
+	    }
+
+		// GET: odata/Posts
+		[EnableQuery]
         public IQueryable<Post> GetPosts()
         {
             return _db.Posts;

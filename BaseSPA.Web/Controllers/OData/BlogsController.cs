@@ -13,7 +13,12 @@ namespace BaseSPA.Web.Controllers.OData
 {
     public class BlogsController : ODataController
     {
-	    private readonly Context _db = ContextFactory.GetContext<Context>();
+	    private readonly Context _db;
+
+	    public BlogsController(ContextFactory contextFactory)
+	    {
+		    _db = contextFactory.GetContext<Context>();
+		}
 
 		// GET: odata/Blogs
 		[EnableQuery]

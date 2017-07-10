@@ -1,5 +1,4 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 
 namespace BaseSPA.Core
 {
@@ -7,7 +6,7 @@ namespace BaseSPA.Core
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
-			builder.RegisterType<ContextFactory>().SingleInstance();
+			builder.RegisterType<ContextFactory>().AsSelf().SingleInstance();
 		}
 	}
 }

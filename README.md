@@ -34,6 +34,20 @@ With postman check some calls like these:
 /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog
 /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog&$select=Title,Content,Blog/Url
 
+# Dependency Injection
 
+Install Autofac, Autofac.WebApi2
+Change ContextFactory as non static class
+Add ModuloCore.cs
+Add the configuration in Startup.cs file
 
+var containerBuilder = new ContainerBuilder();
+containerBuilder.RegisterModule(new ModuloCore());
+containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+var container = containerBuilder.Build();
+
+var config = new HttpConfiguration
+{
+    DependencyResolver = new AutofacWebApiDependencyResolver(container)
+};
 

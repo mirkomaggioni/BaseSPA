@@ -1,6 +1,10 @@
-﻿using System.Web.Http;
+﻿using System.Reflection;
+using System.Web.Http;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
+using Autofac;
+using Autofac.Integration.WebApi;
+using BaseSPA.Core;
 using BaseSPA.Core.Models;
 using Microsoft.Owin;
 using Owin;
@@ -13,7 +17,15 @@ namespace BaseSPA.Web
 	{
 		public void Configuration(IAppBuilder app)
 		{
-			var config = new HttpConfiguration();
+			var containerBuilder = new ContainerBuilder();
+			containerBuilder.RegisterModule(new ModuloCore());
+			containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+			var container = containerBuilder.Build();
+
+			var config = new HttpConfiguration
+			{
+				DependencyResolver = new AutofacWebApiDependencyResolver(container)
+			};
 
 			var builder = new ODataConventionModelBuilder();
 			builder.EntitySet<Blog>("Blogs");
