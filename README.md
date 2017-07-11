@@ -55,6 +55,8 @@ var config = new HttpConfiguration<br/>
 
 Add index.html file<br/>
 Add bootstrap.min.css file, add a basic navbar<br/>
+Change navbar layout with custom css class<br/>
+
 
 
 
