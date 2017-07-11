@@ -51,3 +51,10 @@ var config = new HttpConfiguration<br/>
     DependencyResolver = new AutofacWebApiDependencyResolver(container)<br/>
 };<br/>
 
+# HTML, CSS, Bootstrap
+
+Add index.html file<br/>
+Add bootstrap.min.css file, add a basic navbar<br/>
+
+
+
