@@ -56,6 +56,22 @@ var config = new HttpConfiguration<br/>
 Add index.html file<br/>
 Add bootstrap.min.css file, add a basic navbar<br/>
 Change navbar layout with custom css class<br/>
+Add bootstrap Nav Pills<br/>
+Set custom css class for Nav Pills:<br/>
+<ul>
+<li>
+font color: .nav.nav-pills.nav-stacked li a
+</li>
+<li>
+background hover color: .nav.nav-pills.nav-stacked li a:hover
+</li>
+</ul>
+Set bootstrap columns
+Add font awesome cdn ref:<br/><br/>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+
+
 
 
 

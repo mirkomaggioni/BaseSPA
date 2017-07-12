@@ -6,3 +6,13 @@
 .navbar-default .navbar-brand {
     color: white;
 }
+
+.nav.nav-pills.nav-stacked li a {
+    color: #cb002b;
+}
+
+.nav.nav-pills.nav-stacked li a:hover {
+    color: white;
+    background-color: #cb002b;
+}
+
