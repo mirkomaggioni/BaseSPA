@@ -70,7 +70,12 @@ Set bootstrap columns
 Add font awesome cdn ref:<br/><br/>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
+# Bower
 
+Install nodejs<br/>
+Install bower:<br/>
+npm install -g bower<br/>
+Install bootstrap and font-awesome<br/>
 
 
 

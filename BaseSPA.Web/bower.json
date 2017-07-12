@@ -1,0 +1,13 @@
+{
+  "name": "asp.net",
+  "version": "1.0.0",
+  "authors": [
+    "SinTel"
+  ],
+  "description": "Base SPA",
+  "main": "index.html",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "components-font-awesome": "^4.7.0"
+  }
+}

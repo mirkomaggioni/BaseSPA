@@ -6,6 +6,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+/BaseSPA.Web/bower_components/**/*.*
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
