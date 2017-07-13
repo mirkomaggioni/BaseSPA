@@ -76,6 +76,76 @@ Install nodejs<br/>
 Install bower:<br/>
 npm install -g bower<br/>
 Install bootstrap and font-awesome<br/>
+Replace references in index.html<br/>
+
+#Angular
+
+Install bower packages:<br/><br/>
+angular<br/>
+angular-filter<br/>
+angular-ui-router<br/><br/>
+
+Add app.js file like this:<br/><br/>
+
+(function(window, angular) {
+  'use-strict';
+  angular.module('app', ['ui.router', 'angular.filter', 'mainModule'])
+    .config(['$urlRouterProvider', function($urlRouterProvider) {
+      $urlRouterProvider.otherwise('/');
+    }])
+    .run(['$state', function ($state) {
+      $state.go('main');
+    }]);
+})(window, window.angular);
+
+<br/><br/>
+We have defined a default main state named 'main'<br/>
+Add mainModule.js:<br/><br/>
+
+(function(window, angular) {
+  'use-strict';
+  angular.module('mainModule', ['ui.router'])
+    .config([
+      '$stateProvider', function($stateProvider) {
+        $stateProvider.state('main',
+          {
+            url: '/main',
+            templateUrl: 'app/main/main.html',
+            controller: 'mainCtrl'
+          });
+      }
+    ])
+    .controller('mainCtrl', [
+      '$scope', function($scope) {
+        $scope.Titolo = "homepage";
+      }
+    ]);
+})(window, window.angular);
+
+<br/><br/>Add mainModule.js:<br/><br/>
+
+(function(window, angular) {
+  'use-strict';
+  angular.module('mainModule', ['ui.router'])
+    .config([
+      '$stateProvider', function($stateProvider) {
+        $stateProvider.state('main',
+          {
+            url: '/main',
+            templateUrl: 'app/main/main.html',
+            controller: 'mainCtrl'
+          });
+      }
+    ])
+    .controller('mainCtrl', [
+      '$scope', function($scope) {
+        $scope.Titolo = "homepage";
+      }
+    ]);
+})(window, window.angular);
+
+<br/><br/>We have defined the properties of the state and the controller<br/>
+Add the html page of the state.<br/>
 
 
 

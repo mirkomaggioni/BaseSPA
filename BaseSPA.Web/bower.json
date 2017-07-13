@@ -8,6 +8,9 @@
   "main": "index.html",
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "components-font-awesome": "^4.7.0"
+    "components-font-awesome": "^4.7.0",
+    "angular": "^1.6.5",
+    "angular-filter": "^0.5.16",
+    "angular-ui-router": "^1.0.5"
   }
 }

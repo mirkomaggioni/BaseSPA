@@ -3,13 +3,16 @@
 <head>
     <meta charset="utf-8" />
     <title>Base SPA</title>
-    <!--<link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css" />-->
-    <link rel="stylesheet" type="text/css" href="Content/Site.css" />
-    <!--<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>-->
     <link rel="stylesheet" type="text/css" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="Content/Site.css" />
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/main/mainModule.js"></script>
 </head>
-<body>
+<body ng-app="app">
     <div class="navbar navbar-default">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Home</a>
@@ -32,7 +35,7 @@
         </ul>
     </div>
     <div class="col-lg-10">
-        MAIN
+        <ui-view></ui-view>
     </div>
 </body>
 </html>
