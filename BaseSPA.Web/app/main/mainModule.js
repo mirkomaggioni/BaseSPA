@@ -3,11 +3,13 @@
   angular.module('mainModule', ['ui.router'])
     .config([
       '$stateProvider', function($stateProvider) {
-        $stateProvider.state('main',
+        $stateProvider.state('home',
           {
-            url: '/main',
-            templateUrl: 'app/main/main.html',
-            controller: 'mainCtrl'
+            url: '',
+            views: {
+              'header': { templateUrl: 'app/main/header.html' },
+              'main': { templateUrl: 'app/main/main.html', controller: 'mainCtrl' }
+            }
           });
       }
     ])

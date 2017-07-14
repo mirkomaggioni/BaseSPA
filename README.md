@@ -147,6 +147,34 @@ Add mainModule.js:<br/><br/>
 <br/><br/>We have defined the properties of the state and the controller<br/>
 Add the html page of the state.<br/>
 
+#Angular UI Router
+
+Create a new page header.html and mode the header<br/>
+Move the menù and the content in main.html page<br/>
+Change the main module like this:<br/><br/>
+(function(window, angular) {
+  'use-strict';
+  angular.module('mainModule', ['ui.router'])
+    .config([
+      '$stateProvider', function($stateProvider) {
+        $stateProvider.state('home',
+          {
+            url: '',
+            views: {
+              'header': { templateUrl: 'app/main/header.html' },
+              'main': { templateUrl: 'app/main/main.html', controller: 'mainCtrl' }
+            }
+          });
+      }
+    ])
+    .controller('mainCtrl', [
+      '$scope', function($scope) {
+        $scope.Titolo = "homepage";
+      }
+    ]);
+})(window, window.angular);
+<br/><br/>Remove state.go from the app.js page<br/>
+
 
 
 
