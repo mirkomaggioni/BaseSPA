@@ -173,7 +173,28 @@ Change the main module like this:<br/><br/>
       }
     ]);
 })(window, window.angular);
-<br/><br/>Remove state.go from the app.js page<br/>
+<br/><br/>Remove state.go from the app.js page<br/><br/>
+Add blogsModule and postsModule with html templates, change mainModule<br/><br/>
+(function (window, angular) {
+  'use-strict';
+  angular.module('blogsModule', ['ui.router'])
+    .config([
+      '$stateProvider', function ($stateProvider) {
+        $stateProvider.state('home.blogs',
+          {
+            url: '/blogs',
+            templateUrl: 'app/main/blogs/blogs.html',
+            controller: 'blogsCtrl'
+          });
+      }
+    ])
+    .controller('blogsCtrl', [
+      '$scope', function ($scope) {
+        $scope.Titolo = "BLOGS";
+      }
+    ]);
+})(window, window.angular);
+<br/><br/>
 
 
 

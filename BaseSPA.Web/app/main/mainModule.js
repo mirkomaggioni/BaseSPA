@@ -1,6 +1,6 @@
 ﻿(function(window, angular) {
   'use-strict';
-  angular.module('mainModule', ['ui.router'])
+  angular.module('mainModule', ['ui.router', 'blogsModule', 'postsModule'])
     .config([
       '$stateProvider', function($stateProvider) {
         $stateProvider.state('home',
@@ -14,8 +14,8 @@
       }
     ])
     .controller('mainCtrl', [
-      '$scope', function($scope) {
-        $scope.Titolo = "homepage";
+      '$scope', '$state', function($scope, $state) {
+        $state.go('home.blogs');
       }
     ]);
 })(window, window.angular);

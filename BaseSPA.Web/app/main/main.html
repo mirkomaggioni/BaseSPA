@@ -1,13 +1,13 @@
 ﻿<div class="col-lg-2">
     <ul class="nav nav-pills nav-stacked">
         <li role="presentation">
-            <a href="">
+            <a ui-sref="home.blogs()">
                 <i class="fa fa-users"></i>
                 Blogs
             </a>
         </li>
         <li role="presentation">
-            <a href="">
+            <a ui-sref="home.posts()">
                 <i class="fa fa-ticket"></i>
                 Posts
             </a>
@@ -15,6 +15,5 @@
     </ul>
 </div>
 <div class="col-lg-10">
-    Titolo:
-    {{Titolo}}
+    <div ui-view></div>
 </div>
