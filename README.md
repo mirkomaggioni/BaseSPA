@@ -201,6 +201,8 @@ Add blogsModule and postsModule with html templates, change mainModule<br/><br/>
 Add in blogs.html table a bootstrap table
 Add factory in blogs module
 Add interator in blogs.html page
+Add blog.html page
+Add home.blog state configuration and controller
 
 
 

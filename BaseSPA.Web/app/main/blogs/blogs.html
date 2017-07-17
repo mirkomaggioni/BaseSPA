@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="blog in Blogs">
+        <tr ng-repeat="blog in Blogs" ng-click="detail(blog.Id)">
             <td>
                 {{blog.Name}}
             </td>
