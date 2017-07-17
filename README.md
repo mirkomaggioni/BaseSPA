@@ -196,6 +196,13 @@ Add blogsModule and postsModule with html templates, change mainModule<br/><br/>
 })(window, window.angular);
 <br/><br/>
 
+#Angular Factories
+
+Add in blogs.html table a bootstrap table
+Add factory in blogs module
+Add interator in blogs.html page
+
+
 
 
 

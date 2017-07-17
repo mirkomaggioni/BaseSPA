@@ -59,6 +59,10 @@
     <Compile Include="Migrations\201707081255336_aggiunta-attributo-chiave-primaria.Designer.cs">
       <DependentUpon>201707081255336_aggiunta-attributo-chiave-primaria.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201707170647039_aggiunto-proprietà-nome-a-blog.cs" />
+    <Compile Include="Migrations\201707170647039_aggiunto-proprietà-nome-a-blog.Designer.cs">
+      <DependentUpon>201707170647039_aggiunto-proprietà-nome-a-blog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\Context.cs" />
@@ -76,6 +80,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707081255336_aggiunta-attributo-chiave-primaria.resx">
       <DependentUpon>201707081255336_aggiunta-attributo-chiave-primaria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707170647039_aggiunto-proprietà-nome-a-blog.resx">
+      <DependentUpon>201707170647039_aggiunto-proprietà-nome-a-blog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

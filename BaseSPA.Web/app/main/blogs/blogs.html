@@ -1,2 +1,23 @@
 ﻿
-Titolo: {{Titolo}}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Url
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="blog in Blogs">
+            <td>
+                {{blog.Name}}
+            </td>
+            <td>
+                {{blog.Url}}
+            </td>
+        </tr>
+    </tbody>
+</table>

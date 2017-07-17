@@ -11,9 +11,17 @@
           });
       }
     ])
-    .controller('blogsCtrl', [
-      '$scope', function ($scope) {
-        $scope.Titolo = "BLOGS";
+    .factory('blogsService', ['$http', function($http) {
+      return {
+        lista: function() {
+          return $http.get("/odata/Blogs");
+        }
+      }
+    }])
+    .controller('blogsCtrl', ['$scope', 'blogsService', function ($scope, blogsService) {
+        blogsService.lista().then(function(result) {
+          $scope.Blogs = result.data.value;
+        });
       }
     ]);
 })(window, window.angular);
