@@ -203,6 +203,8 @@ Add factory in blogs module
 Add interator in blogs.html page
 Add blog.html page
 Add home.blog state configuration and controller
+Add list, detail, create, methods to blogService
+
 
 
 

@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('blogsModule', ['ui.router', 'ngResource'])
+  angular.module('blogsModule', ['ui.router'])
     .config([
       '$stateProvider', function ($stateProvider) {
         $stateProvider
@@ -33,7 +33,7 @@
             headers: {
               'Content-Type': 'application/json'
             },
-            data: { blog: JSON.stringify(blog) }
+            data: blog
           };
 
           return $http(req);
@@ -60,8 +60,7 @@
     .controller('blogsDetailCtrl', ['$scope', '$state', '$stateParams', 'blogsService', function ($scope, $state, $stateParams, blogsService) {
 
       $scope.save = function () {
-
-        if ($scope.Blog.Id == '') {
+        if ($scope.Blog.Id === undefined) {
           blogsService.create($scope.Blog).then(function (result) {
             $scope.Blog = result.data;
           });
@@ -77,7 +76,7 @@
       };
 
       if ($stateParams.id == '') {
-        $scope.Blog = { Id: '', Name: '', Url: '' }  
+        $scope.Blog = { Name: '', Url: '' }  
       } else {
         blogsService.detail($stateParams.id).then(function (result) {
           $scope.Blog = result.data;
