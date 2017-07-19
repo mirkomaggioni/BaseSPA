@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('blogsModule', ['ui.router'])
+  angular.module('blogsModule', ['ui.router', 'ngResource'])
     .config([
       '$stateProvider', function ($stateProvider) {
         $stateProvider
@@ -25,14 +25,33 @@
         },
         detail: function (id) {
           return $http.get("/odata/Blogs(guid'" + id + "')");
+        },
+        create: function (blog) {
+          var req = {
+            method: 'POST',
+            url: '/odata/Blogs',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: { blog: JSON.stringify(blog) }
+          };
+
+          return $http(req);
+        },
+        save: function (blog) {
+          return $http.patch("/odata/Blogs", blog);
         }
       }
     }])
     .controller('blogsCtrl', ['$scope', '$state', 'blogsService', function ($scope, $state, blogsService) {
 
+      $scope.new = function() {
+        $state.go("home.blog", { id: null });
+      };
+
       $scope.detail = function(id) {
         $state.go("home.blog", { id: id });
-      }
+      };
 
       blogsService.list().then(function (result) {
         $scope.Blogs = result.data.value;
@@ -40,12 +59,29 @@
     }])
     .controller('blogsDetailCtrl', ['$scope', '$state', '$stateParams', 'blogsService', function ($scope, $state, $stateParams, blogsService) {
 
-      $scope.close = function() {
-        $state.go("home.blogs");
-      }
+      $scope.save = function () {
 
-      blogsService.detail($stateParams.id).then(function (result) {
-        $scope.Blog = result.data;
-      });
+        if ($scope.Blog.Id == '') {
+          blogsService.create($scope.Blog).then(function (result) {
+            $scope.Blog = result.data;
+          });
+        } else {
+          blogsService.save($scope.Blog).then(function (result) {
+            $scope.Blog = result.data;
+          });
+        };
+      };
+
+      $scope.close = function () {
+        $state.go("home.blogs");
+      };
+
+      if ($stateParams.id == '') {
+        $scope.Blog = { Id: '', Name: '', Url: '' }  
+      } else {
+        blogsService.detail($stateParams.id).then(function (result) {
+          $scope.Blog = result.data;
+        });  
+      }
     }]);
 })(window, window.angular);
