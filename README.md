@@ -203,7 +203,15 @@ Add factory in blogs module
 Add interator in blogs.html page
 Add blog.html page
 Add home.blog state configuration and controller
+
+#Blog CRUD Operations
+
 Add list, detail, create, methods to blogService
+Add save, delete methods to blogService
+Fix patch method in ODataController with this row:
+
+_db.Entry(blog).State = EntityState.Modified;
+
 
 
 

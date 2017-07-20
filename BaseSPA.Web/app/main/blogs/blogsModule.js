@@ -39,7 +39,19 @@
           return $http(req);
         },
         save: function (blog) {
-          return $http.patch("/odata/Blogs", blog);
+          var req = {
+            method: 'PATCH',
+            url: '/odata/Blogs(guid\'' + blog.Id + '\')',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: blog
+          };
+
+          return $http(req);
+        },
+        delete: function (id) {
+          return $http.delete("/odata/Blogs(guid'" + id + "')");
         }
       }
     }])
@@ -65,11 +77,15 @@
             $scope.Blog = result.data;
           });
         } else {
-          blogsService.save($scope.Blog).then(function (result) {
-            $scope.Blog = result.data;
-          });
+          blogsService.save($scope.Blog).then(function () {});
         };
       };
+
+      $scope.delete = function() {
+        blogsService.delete($scope.Blog.Id).then(function() {
+          $state.go("home.blogs");
+        });
+      }
 
       $scope.close = function () {
         $state.go("home.blogs");

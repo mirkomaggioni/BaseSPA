@@ -35,7 +35,7 @@ namespace BaseSPA.Web.Controllers.OData
 		}
 
 		// PATCH: odata/Blogs1(5)
-	    [AcceptVerbs("PATCH", "MERGE")]
+		[AcceptVerbs("PATCH", "MERGE")]
 	    public async Task<IHttpActionResult> Patch([FromODataUri] Guid key, Delta<Blog> patch)
 	    {
 		    Validate(patch.GetEntity());
@@ -46,12 +46,13 @@ namespace BaseSPA.Web.Controllers.OData
 		    }
 
 		    var blog = await _db.Blogs.FindAsync(key);
-		    if (blog == null)
+			if (blog == null)
 		    {
 			    return NotFound();
 		    }
 
 		    patch.Patch(blog);
+			_db.Entry(blog).State = EntityState.Modified;
 
 		    await _db.SaveChangesAsync();
 

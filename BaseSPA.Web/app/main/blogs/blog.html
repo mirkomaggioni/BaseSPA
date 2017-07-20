@@ -9,6 +9,6 @@
     </div>
 	
     <button type="submit" class="btn btn-primary" ng-click="save()" ng-disabled="!form.$valid">Save</button>
-	<button type="submit" class="btn btn-danger" ng-disabled="!form.$valid || Blog.Id == ''">Delete</button>
+	<button type="submit" class="btn btn-danger" ng-disabled="!form.$valid || Blog.Id == undefined" ng-click="delete()">Delete</button>
 	<button type="submit" class="btn btn-default" ng-click="close()">Close</button>
 </form>
