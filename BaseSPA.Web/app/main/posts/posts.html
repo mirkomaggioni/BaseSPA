@@ -1,2 +1,25 @@
 ﻿
-Titolo: {{Titolo}}
+<button type="submit" class="btn btn-primary" ng-click="new()">New</button>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Content
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="post in Posts" ng-click="detail(post.Id)">
+        <td>
+            {{post.Title}}
+        </td>
+        <td>
+            {{post.Content}}
+        </td>
+    </tr>
+    </tbody>
+</table>

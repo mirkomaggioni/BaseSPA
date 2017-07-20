@@ -212,7 +212,11 @@ Fix patch method in ODataController with this row:
 
 _db.Entry(blog).State = EntityState.Modified;
 
+#Post CRUD Operations
 
+Add list, detail, create, methods to postService
+Add blogModule dependency to postModule, in order to load the blogs list
+Add post.html page
 
 
 

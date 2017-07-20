@@ -61,8 +61,10 @@ namespace BaseSPA.Web.Controllers.OData
 		// POST: odata/Posts
 		public async Task<IHttpActionResult> Post(Post post)
         {
+			post.Id = Guid.NewGuid();
+
             if (!ModelState.IsValid)
-            {
+			{
                 return BadRequest(ModelState);
             }
 
