@@ -1,5 +1,11 @@
 ﻿
-<button type="submit" class="btn btn-primary" ng-click="new()">New</button>
+<div class="col-lg-10">
+    <button type="submit" class="btn btn-primary" ng-click="new()">New</button>
+</div>
+
+<div class="col-lg-2">
+    <input type="text" class="form-control" placeholder="Search" ng-model="query" required>
+</div>
 
 <table class="table table-striped">
     <thead>
@@ -13,7 +19,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="blog in Blogs" ng-click="detail(blog.Id)">
+        <tr ng-repeat="blog in Blogs | filter: query" ng-click="detail(blog.Id)">
             <td>
                 {{blog.Name}}
             </td>
