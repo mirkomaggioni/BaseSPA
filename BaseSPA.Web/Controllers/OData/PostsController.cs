@@ -52,8 +52,9 @@ namespace BaseSPA.Web.Controllers.OData
 		    }
 
 		    patch.Patch(post);
+		    _db.Entry(post).State = EntityState.Modified;
 
-		    await _db.SaveChangesAsync();
+			await _db.SaveChangesAsync();
 
 		    return Updated(post);
 	    }

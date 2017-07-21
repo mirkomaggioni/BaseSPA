@@ -1,11 +1,7 @@
 ﻿<form name="form">
     <div class="form-group">
         <label for="name">Blog</label>
-        <select id="blog" name="blog" ng-options="blog.Id as blog.Name for blog in Blogs" ng-model="Post.BlogId"></select>
-        <!--<select id="blog" name="blog" ng-options="option.Name for option in Blogs track by option.Id" ng-model="Post.BlogId"></select>-->
-
-        <!--<select ng-model="Post.BlogId" ng-options="Blogs" required></select>-->
-
+        <select class="form-control" id="blog" name="blog" ng-options="blog.Id as blog.Name for blog in Blogs" ng-model="Post.BlogId"></select>
     </div>
     <div class="form-group">
         <label for="name">Title</label>

@@ -217,9 +217,9 @@ _db.Entry(blog).State = EntityState.Modified;
 Add list, detail, create, methods to postService
 Add blogModule dependency to postModule, in order to load the blogs list
 Add post.html page
+Add save, delete methods to postService
+Fix patch method in ODataController with this row:
 
-
-
-
+_db.Entry(blog).State = EntityState.Modified;
 
 
