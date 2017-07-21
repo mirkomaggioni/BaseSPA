@@ -223,3 +223,7 @@ Fix patch method in ODataController with this row:
 _db.Entry(blog).State = EntityState.Modified;
 
 
+#Filters
+
+Add search field on top of blogs.html and posts.html
+Add filter in ng-repeat of the pages
