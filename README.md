@@ -3,6 +3,8 @@ Documentation
 
 # Web Api 2 Web services
 
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
+
 Remove Global.asax file<br/>
 Remove Application Insights files if presents<br/>
 Remove files in App_start folder except FilterConfig.cs<br/>
@@ -23,6 +25,8 @@ Add a route attribute to GetBlogPosts action<br/>
 
 # OData
 
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint
+
 Create Blogs ODataController and Posts ODataController, remove useless ApiController<br/>
 Add the route configuration in Startup.cs file; the configuration is specified in the ODataController if it was created with scaffolding<br/>
 With postman check some calls like these:<br/>
@@ -35,6 +39,8 @@ With postman check some calls like these:<br/>
 /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog&$select=Title,Content,Blog/Url<br/>
 
 # Dependency Injection
+
+http://autofac.readthedocs.io/en/latest/getting-started/index.html
 
 Install Autofac, Autofac.WebApi2<br/>
 Change ContextFactory as non static class<br/>
@@ -52,6 +58,8 @@ var config = new HttpConfiguration<br/>
 };<br/>
 
 # HTML, CSS, Bootstrap
+
+http://getbootstrap.com/getting-started/
 
 Add index.html file<br/>
 Add bootstrap.min.css file, add a basic navbar<br/>
@@ -72,6 +80,8 @@ Add font awesome cdn ref:<br/><br/>
 
 # Bower
 
+https://bower.io/
+
 Install nodejs<br/>
 Install bower:<br/>
 npm install -g bower<br/>
@@ -79,6 +89,8 @@ Install bootstrap and font-awesome<br/>
 Replace references in index.html<br/>
 
 #Angular
+
+https://angularjs.org/
 
 Install bower packages:<br/><br/>
 angular<br/>
@@ -149,6 +161,8 @@ Add the html page of the state.<br/>
 
 #Angular UI Router
 
+https://ui-router.github.io/ng1/tutorial/helloworld
+
 Create a new page header.html and mode the header<br/>
 Move the menù and the content in main.html page<br/>
 Change the main module like this:<br/><br/>
@@ -198,6 +212,8 @@ Add blogsModule and postsModule with html templates, change mainModule<br/><br/>
 
 #Angular Factories
 
+https://docs.angularjs.org/guide/services
+
 Add in blogs.html table a bootstrap table
 Add factory in blogs module
 Add interator in blogs.html page
@@ -225,5 +241,13 @@ _db.Entry(blog).State = EntityState.Modified;
 
 #Filters
 
+https://docs.angularjs.org/guide/filter
+
 Add search field on top of blogs.html and posts.html
 Add filter in ng-repeat of the pages
+
+#Directives
+
+https://docs.angularjs.org/guide/directive
+
+Add uiSelect directive
