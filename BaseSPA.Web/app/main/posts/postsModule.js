@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('postsModule', ['ui.router', 'blogsModule'])
+  angular.module('postsModule', ['ui.router', 'blogsModule', 'uiModule'])
     .config([
       '$stateProvider', function ($stateProvider) {
         $stateProvider.state('home.posts',

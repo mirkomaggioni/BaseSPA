@@ -197,6 +197,8 @@
     <Content Include="app\main\posts\post.html" />
     <Content Include="app\main\posts\posts.html" />
     <Content Include="app\main\posts\postsModule.js" />
+    <Content Include="app\main\shared\ui-select.html" />
+    <Content Include="app\main\shared\uiModule.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
