@@ -1,9 +1,11 @@
 # Base SPA
 Documentation
 
-# Web Api 2 Web services
-
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
+
+# App configuration
+
+## Project creation
 
 Remove Global.asax file<br/>
 Remove Application Insights files if presents<br/>
@@ -12,10 +14,14 @@ Add Startup.cs file<br/>
 Set HttpConfiguration in Startup.cs<br/>
 Install these mandatory packages:<br/>
 
+## Packages installation
+
 Microsoft.AspNet.WebApi.OwinSelfHost<br/>
 Microsoft.AspNet.WebApi.Owin<br/>
 Microsoft.Owin.Hosting<br/>
 Microsoft.Owin.Host.SystemWeb<br/>
+
+# Web Api 2 Web services
 
 Add a new web api Blogs, start the project and check with a client like postman the url api/blogs<br/>
 
@@ -27,9 +33,13 @@ Add a route attribute to GetBlogPosts action<br/>
 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint
 
+## Controllers creation
+
 Create Blogs ODataController and Posts ODataController, remove useless ApiController<br/>
 Add the route configuration in Startup.cs file; the configuration is specified in the ODataController if it was created with scaffolding<br/>
 With postman check some calls like these:<br/>
+
+## Tests with Postman
 
 /odata/$metadata<br/>
 /odata/Blogs<br/>
@@ -38,7 +48,7 @@ With postman check some calls like these:<br/>
 /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog<br/>
 /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog&$select=Title,Content,Blog/Url<br/>
 
-# Dependency Injection
+# Dependency Injection with Autofac
 
 http://autofac.readthedocs.io/en/latest/getting-started/index.html
 
@@ -78,24 +88,34 @@ Set bootstrap columns
 Add font awesome cdn ref:<br/><br/>
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
-# Bower
+# Client packages
 
+https://www.npmjs.com/
 https://bower.io/
+
+## Node/NPM
 
 Install nodejs<br/>
 Install bower:<br/>
 npm install -g bower<br/>
+
+## Bower
+
 Install bootstrap and font-awesome<br/>
 Replace references in index.html<br/>
 
-#Angular
+# Angular
 
 https://angularjs.org/
+
+## Configuration
 
 Install bower packages:<br/><br/>
 angular<br/>
 angular-filter<br/>
 angular-ui-router<br/><br/>
+
+## Application bootstrap
 
 Add app.js file like this:<br/><br/>
 
@@ -110,7 +130,8 @@ Add app.js file like this:<br/><br/>
     }]);
 })(window, window.angular);
 
-<br/><br/>
+## Controllers
+
 We have defined a default main state named 'main'<br/>
 Add mainModule.js:<br/><br/>
 
@@ -136,30 +157,10 @@ Add mainModule.js:<br/><br/>
 
 <br/><br/>Add mainModule.js:<br/><br/>
 
-(function(window, angular) {
-  'use-strict';
-  angular.module('mainModule', ['ui.router'])
-    .config([
-      '$stateProvider', function($stateProvider) {
-        $stateProvider.state('main',
-          {
-            url: '/main',
-            templateUrl: 'app/main/main.html',
-            controller: 'mainCtrl'
-          });
-      }
-    ])
-    .controller('mainCtrl', [
-      '$scope', function($scope) {
-        $scope.Titolo = "homepage";
-      }
-    ]);
-})(window, window.angular);
-
 <br/><br/>We have defined the properties of the state and the controller<br/>
 Add the html page of the state.<br/>
 
-#Angular UI Router
+## UI Router
 
 https://ui-router.github.io/ng1/tutorial/helloworld
 
@@ -210,7 +211,7 @@ Add blogsModule and postsModule with html templates, change mainModule<br/><br/>
 })(window, window.angular);
 <br/><br/>
 
-#Angular Factories
+## Factories
 
 https://docs.angularjs.org/guide/services
 
@@ -220,7 +221,7 @@ Add interator in blogs.html page
 Add blog.html page
 Add home.blog state configuration and controller
 
-#Blog CRUD Operations
+## Blog CRUD Operations
 
 Add list, detail, create, methods to blogService
 Add save, delete methods to blogService
@@ -228,7 +229,7 @@ Fix patch method in ODataController with this row:
 
 _db.Entry(blog).State = EntityState.Modified;
 
-#Post CRUD Operations
+## Post CRUD Operations
 
 Add list, detail, create, methods to postService
 Add blogModule dependency to postModule, in order to load the blogs list
@@ -239,14 +240,14 @@ Fix patch method in ODataController with this row:
 _db.Entry(blog).State = EntityState.Modified;
 
 
-#Filters
+## Filters
 
 https://docs.angularjs.org/guide/filter
 
 Add search field on top of blogs.html and posts.html
 Add filter in ng-repeat of the pages
 
-#Directives
+## Directives
 
 https://docs.angularjs.org/guide/directive
 
