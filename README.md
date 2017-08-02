@@ -7,19 +7,24 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-as
 
 ## Project creation
 
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api
+
+Create an empty project with WabApi<br/>
 Remove Global.asax file<br/>
-Remove Application Insights files if presents<br/>
-Remove files in App_start folder except FilterConfig.cs<br/>
 Add Startup.cs file<br/>
 Set HttpConfiguration in Startup.cs<br/>
-Install these mandatory packages:<br/>
 
 ## Packages installation
 
+Install these mandatory packages:<br/><br/>
+
 Microsoft.AspNet.WebApi.OwinSelfHost<br/>
+Microsoft.Owin.Host.SystemWeb<br/><br/>
+
+Check if these packages are installed:<br/>
 Microsoft.AspNet.WebApi.Owin<br/>
 Microsoft.Owin.Hosting<br/>
-Microsoft.Owin.Host.SystemWeb<br/>
+
 
 # Web Api 2 Web services
 
