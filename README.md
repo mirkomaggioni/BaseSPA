@@ -56,6 +56,7 @@ With postman check some calls like these:<br/>
 # Dependency Injection with Autofac
 
 http://autofac.readthedocs.io/en/latest/getting-started/index.html
+http://docs.autofac.org/en/latest/integration/webapi.html?highlight=web%20api#register-controllers
 
 Install Autofac, Autofac.WebApi2<br/>
 Change ContextFactory as non static class<br/>
