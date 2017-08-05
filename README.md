@@ -56,7 +56,6 @@ With postman check some calls like these:<br/>
 # Dependency Injection with Autofac
 
 http://autofac.readthedocs.io/en/latest/getting-started/index.html
-http://docs.autofac.org/en/latest/integration/webapi.html?highlight=web%20api#register-controllers
 
 Install Autofac, Autofac.WebApi2<br/>
 Change ContextFactory as non static class<br/>
@@ -168,6 +167,7 @@ Add the html page of the state.<br/>
 
 ## UI Router
 
+https://github.com/angular-ui/ui-router/wiki/URL-Routing
 https://ui-router.github.io/ng1/tutorial/helloworld
 
 Create a new page header.html and mode the header<br/>
