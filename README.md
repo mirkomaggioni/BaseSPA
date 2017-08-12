@@ -28,6 +28,8 @@ Microsoft.Owin.Hosting<br/>
 
 # Web Api 2 Web services
 
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
+
 Add a new web api Blogs, start the project and check with a client like postman the url api/blogs<br/>
 
 Add a new web api Posts, with two get with an id as parameter, the first one is to get all post of a blog, the second one is
@@ -75,6 +77,11 @@ var config = new HttpConfiguration<br/>
 # HTML, CSS, Bootstrap
 
 http://getbootstrap.com/getting-started/
+https://getbootstrap.com/docs/3.3/components/#navbar
+https://getbootstrap.com/docs/3.3/components/#nav
+https://getbootstrap.com/docs/3.3/components/#panels
+https://getbootstrap.com/docs/3.3/css/#tables
+https://getbootstrap.com/docs/3.3/css/#forms
 
 Add index.html file<br/>
 Add bootstrap.min.css file, add a basic navbar<br/>
@@ -122,6 +129,8 @@ angular-ui-router<br/><br/>
 
 ## Application bootstrap
 
+https://docs.angularjs.org/guide/bootstrap
+
 Add app.js file like this:<br/><br/>
 
 (function(window, angular) {
@@ -136,6 +145,9 @@ Add app.js file like this:<br/><br/>
 })(window, window.angular);
 
 ## Controllers
+
+https://docs.angularjs.org/guide/di
+https://docs.angularjs.org/guide/controller
 
 We have defined a default main state named 'main'<br/>
 Add mainModule.js:<br/><br/>
