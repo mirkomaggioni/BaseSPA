@@ -12,6 +12,13 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-as
   ```
   Install-Package EntityFramework
   ```
+* Create Models directory and add models classes (Blog, Post)
+* Create Context class (Context)
+* Enable Migrations and create Initial migration
+  ```
+  Enable-Migrations
+  Add-Migration InitialCreate
+  ```
 
 ## Web Project creation
 
