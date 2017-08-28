@@ -82,20 +82,22 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet
 
 http://autofac.readthedocs.io/en/latest/getting-started/index.html
 
-Install Autofac, Autofac.WebApi2<br/>
-Change ContextFactory as non static class<br/>
-Add ModuloCore.cs<br/>
-Add the configuration in Startup.cs file<br/>
+* Install Autofac, Autofac.WebApi2
+* Change ContextFactory as non static class
+* Add ModuloCore.cs
+* Add the configuration in Startup.cs file
 
-var containerBuilder = new ContainerBuilder();<br/>
-containerBuilder.RegisterModule(new ModuloCore());<br/>
-containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());<br/>
-var container = containerBuilder.Build();<br/>
+  ``` cs
+  var containerBuilder = new ContainerBuilder();
+  containerBuilder.RegisterModule(new ModuloCore());
+  containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+  var container = containerBuilder.Build();
 
-var config = new HttpConfiguration<br/>
-{<br/>
-    DependencyResolver = new AutofacWebApiDependencyResolver(container)<br/>
-};<br/>
+  var config = new HttpConfiguration
+  {
+    DependencyResolver = new AutofacWebApiDependencyResolver(container)
+  };
+  ```
 
 # HTML, CSS, Bootstrap
 
