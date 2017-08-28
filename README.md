@@ -5,25 +5,42 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-as
 
 # App configuration
 
-## Project creation
+## Model Project creation
+
+* Create a Class Library Project (.NET Framework 4.6.1) 
+* Install these mandatory packages
+  ```
+  Install-Package EntityFramework
+  ```
+
+## Web Project creation
 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api
 
-Create an empty project with WabApi<br/>
-Remove Global.asax file<br/>
-Add Startup.cs file<br/>
-Set HttpConfiguration in Startup.cs<br/>
+* Create an ASP.NET Web Application (.NET Framework 4.6.1) with Empty template
+* Install these mandatory packages
+  ```
+  Install-Package Microsoft.AspNet.WebApi.OwinSelfHost
+  Install-Package Microsoft.Owin.Host.SystemWeb
+  ```
+* Add Startup.cs file
+  ``` cs
+  public class Startup
+  {
+    public void Configuration(IAppBuilder appBuilder)
+    {
+      // Configure Web API for self-host. 
+      HttpConfiguration config = new HttpConfiguration();
+      config.Routes.MapHttpRoute(
+        name: "DefaultApi",
+        routeTemplate: "api/{controller}/{id}",
+        defaults: new { id = RouteParameter.Optional }
+      );
 
-## Packages installation
-
-Install these mandatory packages:<br/><br/>
-
-Microsoft.AspNet.WebApi.OwinSelfHost<br/>
-Microsoft.Owin.Host.SystemWeb<br/><br/>
-
-Check if these packages are installed:<br/>
-Microsoft.AspNet.WebApi.Owin<br/>
-Microsoft.Owin.Hosting<br/>
+      appBuilder.UseWebApi(config);
+    }
+  }
+  ```
 
 
 # Web Api 2 Web services
