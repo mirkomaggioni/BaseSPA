@@ -54,11 +54,10 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/
 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
 
-Add a new web api Blogs, start the project and check with a client like postman the url api/blogs<br/>
-
-Add a new web api Posts, with two get with an id as parameter, the first one is to get all post of a blog, the second one is
-to get a single post<br/>
-Add a route attribute to GetBlogPosts action<br/>
+* Add a new web api Blogs, start the project and check with a client like postman the url api/blogs
+* Add a new web api Posts, with two get with an id as parameter, the first one is to get all post of a blog, the second one is
+to get a single post
+* Add a route attribute to GetBlogPosts action
 
 # OData
 
@@ -66,18 +65,18 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet
 
 ## Controllers creation
 
-Create Blogs ODataController and Posts ODataController, remove useless ApiController<br/>
-Add the route configuration in Startup.cs file; the configuration is specified in the ODataController if it was created with scaffolding<br/>
-With postman check some calls like these:<br/>
+* Create Blogs ODataController and Posts ODataController, remove useless ApiController
+* Add the route configuration in Startup.cs file; the configuration is specified in the ODataController if it was created with scaffolding
+* With postman check some calls like these:
 
 ## Tests with Postman
 
-/odata/$metadata<br/>
-/odata/Blogs<br/>
-/odata/Blogs(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c8')<br/>
-/odata/Posts<br/>
-/odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog<br/>
-/odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog&$select=Title,Content,Blog/Url<br/>
+* /odata/$metadata
+* /odata/Blogs
+* /odata/Blogs(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c8')
+* /odata/Posts
+* /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog
+* /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog&$select=Title,Content,Blog/Url
 
 # Dependency Injection with Autofac
 
