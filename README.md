@@ -50,9 +50,11 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/
 
 # Web Api 2 Web services
 
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/action-results
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-2
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api<br/>
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/action-results<br/>
+https://it.wikipedia.org/wiki/JavaScript_Object_Notation<br/>
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/routing-in-aspnet-web-api<br/>
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-2<br/>
 
 * Add a new web api Blogs, start the project and check with a client like postman the url api/blogs
 * Add a new web api Posts, with two get with an id as parameter, the first one is to get all post of a blog, the second one is
@@ -61,8 +63,8 @@ to get a single post
 
 # OData
 
-http://www.odata.org/
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint
+http://www.odata.org/<br/>
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint<br/>
 
 ## Controllers creation
 
@@ -81,14 +83,14 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet
 
 ## Research material
 
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/entity-relations-in-odata-v4
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/odata-actions-and-functions
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/entity-relations-in-odata-v4<br/>
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/odata-actions-and-functions<br/>
 
 # Dependency Injection with Autofac
 
-http://autofac.readthedocs.io/en/latest/getting-started/index.html
-http://autofac.readthedocs.io/en/latest/register/registration.html
-http://autofac.readthedocs.io/en/latest/configuration/modules.html
+http://autofac.readthedocs.io/en/latest/getting-started/index.html<br/>
+http://autofac.readthedocs.io/en/latest/register/registration.html<br/>
+http://autofac.readthedocs.io/en/latest/configuration/modules.html<br/>
 
 * Install Autofac, Autofac.WebApi2
 * Change ContextFactory as non static class
@@ -109,18 +111,43 @@ http://autofac.readthedocs.io/en/latest/configuration/modules.html
 
 # HTML, CSS, Bootstrap
 
-http://getbootstrap.com/getting-started/
-https://getbootstrap.com/docs/3.3/components/#navbar
-https://getbootstrap.com/docs/3.3/components/#nav
-https://getbootstrap.com/docs/3.3/components/#panels
-https://getbootstrap.com/docs/3.3/css/#tables
-https://getbootstrap.com/docs/3.3/css/#forms
+## HTML
 
-Add index.html file<br/>
-Add bootstrap.min.css file, add a basic navbar<br/>
-Change navbar layout with custom css class<br/>
-Add bootstrap Nav Pills<br/>
-Set custom css class for Nav Pills:<br/>
+https://www.w3schools.com/html/html5_intro.asp<br/>
+https://www.w3schools.com/html/html_basic.asp<br/>
+https://www.w3schools.com/html/html_attributes.asp<br/>
+https://www.w3schools.com/html/html_links.asp<br/>
+https://www.w3schools.com/html/html_images.asp<br/>
+https://www.w3schools.com/html/html_tables.asp<br/>
+https://www.w3schools.com/html/html_lists.asp<br/>
+https://www.w3schools.com/html/html_blocks.asp<br/>
+
+* Add index.html file
+
+## CSS
+
+https://www.w3schools.com/html/html_styles.asp<br/>
+https://www.w3schools.com/html/html_formatting.asp<br/>
+https://www.w3schools.com/html/html_css.asp<br/>
+https://www.w3schools.com/html/html_classes.asp<br/>
+
+## Bootstrap
+
+http://getbootstrap.com/getting-started/<br/>
+https://getbootstrap.com/docs/3.3/components/#labels<br/>
+https://getbootstrap.com/docs/3.3/components/#navbar<br/>
+https://getbootstrap.com/docs/3.3/components/#nav<br/>
+https://getbootstrap.com/docs/3.3/components/#panels<br/>
+https://getbootstrap.com/docs/3.3/css/#tables<br/>
+https://getbootstrap.com/docs/3.3/css/#forms<br/>
+https://getbootstrap.com/docs/3.3/components/#badges<br/>
+
+* Add bootstrap.min.css file, add a basic navbar
+* Change navbar layout with custom css class
+* Add bootstrap Nav Pills
+* Set custom css class for Nav Pills:
+
+``` html
 <ul>
 <li>
 font color: .nav.nav-pills.nav-stacked li a
@@ -129,14 +156,24 @@ font color: .nav.nav-pills.nav-stacked li a
 background hover color: .nav.nav-pills.nav-stacked li a:hover
 </li>
 </ul>
-Set bootstrap columns
-Add font awesome cdn ref:<br/><br/>
+```
+
+* Set bootstrap columns
+* Add font awesome cdn ref:
 <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+## Research material
+
+https://www.w3schools.com/html/html_forms.asp<br/>
+https://www.w3schools.com/html/html_form_elements.asp<br/>
+https://www.w3schools.com/html/html_form_input_types.asp<br/>
+https://www.w3schools.com/html/html_form_attributes.asp<br/>
 
 # Client packages
 
-https://www.npmjs.com/
-https://bower.io/
+https://nodejs.org/en/<br/>
+https://www.npmjs.com/<br/>
+https://bower.io/<br/>
 
 ## Node/NPM
 
@@ -179,8 +216,8 @@ Add app.js file like this:<br/><br/>
 
 ## Controllers
 
-https://docs.angularjs.org/guide/di
-https://docs.angularjs.org/guide/controller
+https://docs.angularjs.org/guide/di<br/>
+https://docs.angularjs.org/guide/controller<br/>
 
 We have defined a default main state named 'main'<br/>
 Add mainModule.js:<br/><br/>
@@ -212,8 +249,8 @@ Add the html page of the state.<br/>
 
 ## UI Router
 
-https://github.com/angular-ui/ui-router/wiki/URL-Routing
-https://ui-router.github.io/ng1/tutorial/helloworld
+https://github.com/angular-ui/ui-router/wiki/URL-Routing<br/>
+https://ui-router.github.io/ng1/tutorial/helloworld<br/>
 
 Create a new page header.html and mode the header<br/>
 Move the menù and the content in main.html page<br/>
@@ -264,7 +301,7 @@ Add blogsModule and postsModule with html templates, change mainModule<br/><br/>
 
 ## Factories
 
-https://docs.angularjs.org/guide/services
+https://docs.angularjs.org/guide/services<br/>
 
 Add in blogs.html table a bootstrap table
 Add factory in blogs module
@@ -293,13 +330,13 @@ _db.Entry(blog).State = EntityState.Modified;
 
 ## Filters
 
-https://docs.angularjs.org/guide/filter
+https://docs.angularjs.org/guide/filter<br/>
 
 Add search field on top of blogs.html and posts.html
 Add filter in ng-repeat of the pages
 
 ## Directives
 
-https://docs.angularjs.org/guide/directive
+https://docs.angularjs.org/guide/directive<br/>
 
 Add uiSelect directive
