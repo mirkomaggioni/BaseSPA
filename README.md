@@ -1,8 +1,6 @@
 # Base SPA
 Documentation
 
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
-
 # App configuration
 
 ## Model Project creation
@@ -53,6 +51,7 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/
 # Web Api 2 Web services
 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/action-results
 
 * Add a new web api Blogs, start the project and check with a client like postman the url api/blogs
 * Add a new web api Posts, with two get with an id as parameter, the first one is to get all post of a blog, the second one is
