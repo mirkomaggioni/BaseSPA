@@ -52,6 +52,7 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/
 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/action-results
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-2
 
 * Add a new web api Blogs, start the project and check with a client like postman the url api/blogs
 * Add a new web api Posts, with two get with an id as parameter, the first one is to get all post of a blog, the second one is
@@ -60,6 +61,7 @@ to get a single post
 
 # OData
 
+http://www.odata.org/
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint
 
 ## Controllers creation
@@ -77,9 +79,16 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet
 * /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog
 * /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog&$select=Title,Content,Blog/Url
 
+## Research material
+
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/entity-relations-in-odata-v4
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/odata-actions-and-functions
+
 # Dependency Injection with Autofac
 
 http://autofac.readthedocs.io/en/latest/getting-started/index.html
+http://autofac.readthedocs.io/en/latest/register/registration.html
+http://autofac.readthedocs.io/en/latest/configuration/modules.html
 
 * Install Autofac, Autofac.WebApi2
 * Change ContextFactory as non static class
