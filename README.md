@@ -3,21 +3,6 @@ Documentation
 
 # App configuration
 
-## Model Project creation
-
-* Create a Class Library Project (.NET Framework 4.6.1) 
-* Install these mandatory packages
-  ```
-  Install-Package EntityFramework
-  ```
-* Create Models directory and add models classes (Blog, Post)
-* Create Context class (Context)
-* Enable Migrations and create Initial migration
-  ```
-  Enable-Migrations
-  Add-Migration InitialCreate
-  ```
-
 ## Web Project creation
 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/use-owin-to-self-host-web-api
@@ -36,6 +21,7 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/
     {
       // Configure Web API for self-host. 
       HttpConfiguration config = new HttpConfiguration();
+      config.MapHttpAttributeRoutes();
       config.Routes.MapHttpRoute(
         name: "DefaultApi",
         routeTemplate: "api/{controller}/{id}",
@@ -45,6 +31,21 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/
       appBuilder.UseWebApi(config);
     }
   }
+  ```
+
+## Model Project creation
+
+* Create a Class Library Project (.NET Framework 4.6.1) 
+* Install these mandatory packages
+  ```
+  Install-Package EntityFramework
+  ```
+* Create Models directory and add models classes (Blog, Post)
+* Create Context class (Context)
+* Enable Migrations and create Initial migration
+  ```
+  Enable-Migrations
+  Add-Migration InitialCreate
   ```
 
 
@@ -64,7 +65,21 @@ to get a single post
 # OData
 
 http://www.odata.org/  
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint<br/>
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint  
+
+* Install these mandatory packages
+  ```
+  Install-Package Microsoft.AspNet.Odata
+  ```
+* Add the configuration in Startup.cs file (after web api section)
+
+  ``` cs
+  var builder = new ODataConventionModelBuilder();
+  builder.EntitySet<Blog>("Blogs");
+  builder.EntitySet<Post>("Posts");
+  config.Count().Filter().OrderBy().Expand().Select().MaxTop(null);
+  config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+  ```
 
 ## Controllers creation
 
@@ -76,15 +91,15 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet
 
 * /odata/$metadata
 * /odata/Blogs
-* /odata/Blogs(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c8')
+* /odata/Blogs(cad6651d-7a2c-434b-883b-cbd3ab5d57c8)
 * /odata/Posts
-* /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog
-* /odata/Posts(guid'cad6651d-7a2c-434b-883b-cbd3ab5d57c3')?$expand=Blog&$select=Title,Content,Blog/Url
+* /odata/Posts(cad6651d-7a2c-434b-883b-cbd3ab5d57c3)?$expand=Blog
+* /odata/Posts(cad6651d-7a2c-434b-883b-cbd3ab5d57c3)?$expand=Blog&$select=Title,Content,Blog/Url
 
 ## Research material
 
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/entity-relations-in-odata-v4<br/>
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/odata-actions-and-functions<br/>
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/entity-relations-in-odata-v4  
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/odata-actions-and-functions  
 
 # Dependency Injection with Autofac
 
