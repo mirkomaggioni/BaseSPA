@@ -50,11 +50,11 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/
 
 # Web Api 2 Web services
 
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api<br/>
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/action-results<br/>
-https://it.wikipedia.org/wiki/JavaScript_Object_Notation<br/>
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/routing-in-aspnet-web-api<br/>
-https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-2<br/>
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api  
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/action-results  
+https://it.wikipedia.org/wiki/JavaScript_Object_Notation  
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/web-api-routing-and-actions/routing-in-aspnet-web-api  
+https://docs.microsoft.com/en-us/aspnet/web-api/overview/data/using-web-api-with-entity-framework/part-2  
 
 * Add a new web api Blogs, start the project and check with a client like postman the url api/blogs
 * Add a new web api Posts, with two get with an id as parameter, the first one is to get all post of a blog, the second one is
@@ -63,7 +63,7 @@ to get a single post
 
 # OData
 
-http://www.odata.org/<br/>
+http://www.odata.org/  
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet-web-api/odata-v4/create-an-odata-v4-endpoint<br/>
 
 ## Controllers creation
