@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BaseSPA.Core.Models
 {
-	public class Context : DbContext
+	public class SpaContext : DbContext
 	{
 		public DbSet<Blog> Blogs { get; set; }
 		public DbSet<Post> Posts { get; set; }
