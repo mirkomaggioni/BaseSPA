@@ -237,10 +237,12 @@ https://docs.angularjs.org/guide/controller
 
 App module refactoring, removing array annotation  
 
+https://docs.angularjs.org/guide/module  
+
 ## UI Router
 
-https://github.com/angular-ui/ui-router/wiki/URL-Routing  
 https://ui-router.github.io/ng1/tutorial/helloworld  
+https://github.com/angular-ui/ui-router/wiki  
 
 We have defined a default main state named 'main'  
 Add mainModule.js:  
@@ -267,14 +269,25 @@ Add mainModule.js:
 })(window, window.angular);
 ```
 
-Add mainModule.js:  
+Refactoring app.js:  
+
+``` javascript
+(function(window, angular) {
+  angular.module('app', ['ui.router', 'mainModule'])
+  .run(function($state) {
+    $state.go('hello');
+   });
+})(window, window.angular)
+```
 
 We have defined the properties of the state and the controller  
-Add the html page of the state.  
 
-Create a new page header.html and mode the header  
-Move the menù and the content in main.html page  
-Change the main module like this:  
+* Add the html page of the state
+* Create a new page header.html and mode the header
+* Move the menù and the content in main.html page
+* Change the main module like this:
+
+``` javascript
 (function(window, angular) {
   'use-strict';
   angular.module('mainModule', ['ui.router'])
@@ -296,8 +309,13 @@ Change the main module like this:
       }
     ]);
 })(window, window.angular);
-<br/><br/>Remove state.go from the app.js page<br/><br/>
-Add blogsModule and postsModule with html templates, change mainModule<br/><br/>
+```
+
+https://ui-router.github.io/ng1/tutorial/hellogalaxy  
+
+Add blogsModule and postsModule with html templates, change mainModule  
+
+``` javascript
 (function (window, angular) {
   'use-strict';
   angular.module('blogsModule', ['ui.router'])
@@ -317,7 +335,7 @@ Add blogsModule and postsModule with html templates, change mainModule<br/><br/>
       }
     ]);
 })(window, window.angular);
-<br/><br/>
+```
 
 ## Factories
 
