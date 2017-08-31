@@ -103,9 +103,9 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/odata-support-in-aspnet
 
 # Dependency Injection with Autofac
 
-http://autofac.readthedocs.io/en/latest/getting-started/index.html<br/>
-http://autofac.readthedocs.io/en/latest/register/registration.html<br/>
-http://autofac.readthedocs.io/en/latest/configuration/modules.html<br/>
+http://autofac.readthedocs.io/en/latest/getting-started/index.html  
+http://autofac.readthedocs.io/en/latest/register/registration.html  
+http://autofac.readthedocs.io/en/latest/configuration/modules.html  
 
 * Install Autofac, Autofac.WebApi2
 * Change ContextFactory as non static class
@@ -128,34 +128,34 @@ http://autofac.readthedocs.io/en/latest/configuration/modules.html<br/>
 
 ## HTML
 
-https://www.w3schools.com/html/html5_intro.asp<br/>
-https://www.w3schools.com/html/html_basic.asp<br/>
-https://www.w3schools.com/html/html_attributes.asp<br/>
-https://www.w3schools.com/html/html_links.asp<br/>
-https://www.w3schools.com/html/html_images.asp<br/>
-https://www.w3schools.com/html/html_tables.asp<br/>
-https://www.w3schools.com/html/html_lists.asp<br/>
-https://www.w3schools.com/html/html_blocks.asp<br/>
+https://www.w3schools.com/html/html5_intro.asp  
+https://www.w3schools.com/html/html_basic.asp  
+https://www.w3schools.com/html/html_attributes.asp  
+https://www.w3schools.com/html/html_links.asp  
+https://www.w3schools.com/html/html_images.asp  
+https://www.w3schools.com/html/html_tables.asp  
+https://www.w3schools.com/html/html_lists.asp  
+https://www.w3schools.com/html/html_blocks.asp  
 
 * Add index.html file
 
 ## CSS
 
-https://www.w3schools.com/html/html_styles.asp<br/>
-https://www.w3schools.com/html/html_formatting.asp<br/>
-https://www.w3schools.com/html/html_css.asp<br/>
-https://www.w3schools.com/html/html_classes.asp<br/>
+https://www.w3schools.com/html/html_styles.asp  
+https://www.w3schools.com/html/html_formatting.asp  
+https://www.w3schools.com/html/html_css.asp  
+https://www.w3schools.com/html/html_classes.asp  
 
 ## Bootstrap
 
-http://getbootstrap.com/getting-started/<br/>
-https://getbootstrap.com/docs/3.3/components/#labels<br/>
-https://getbootstrap.com/docs/3.3/components/#navbar<br/>
-https://getbootstrap.com/docs/3.3/components/#nav<br/>
-https://getbootstrap.com/docs/3.3/components/#panels<br/>
-https://getbootstrap.com/docs/3.3/css/#tables<br/>
-https://getbootstrap.com/docs/3.3/css/#forms<br/>
-https://getbootstrap.com/docs/3.3/components/#badges<br/>
+http://getbootstrap.com/getting-started/  
+https://getbootstrap.com/docs/3.3/components/#labels  
+https://getbootstrap.com/docs/3.3/components/#navbar  
+https://getbootstrap.com/docs/3.3/components/#nav  
+https://getbootstrap.com/docs/3.3/components/#panels  
+https://getbootstrap.com/docs/3.3/css/#tables  
+https://getbootstrap.com/docs/3.3/css/#forms  
+https://getbootstrap.com/docs/3.3/components/#badges  
 
 * Add bootstrap.min.css file, add a basic navbar
 * Change navbar layout with custom css class
@@ -179,64 +179,73 @@ background hover color: .nav.nav-pills.nav-stacked li a:hover
 
 ## Research material
 
-https://www.w3schools.com/html/html_forms.asp<br/>
-https://www.w3schools.com/html/html_form_elements.asp<br/>
-https://www.w3schools.com/html/html_form_input_types.asp<br/>
-https://www.w3schools.com/html/html_form_attributes.asp<br/>
+https://www.w3schools.com/html/html_forms.asp  
+https://www.w3schools.com/html/html_form_elements.asp  
+https://www.w3schools.com/html/html_form_input_types.asp  
+https://www.w3schools.com/html/html_form_attributes.asp  
 
 # Client packages
 
-https://nodejs.org/en/<br/>
-https://www.npmjs.com/<br/>
-https://bower.io/<br/>
+https://nodejs.org/en/  
+https://www.npmjs.com/  
+https://bower.io/  
 
 ## Node/NPM
 
-Install nodejs<br/>
-Install bower:<br/>
-npm install -g bower<br/>
+Install nodejs  
+Install bower:  
+npm install -g bower  
 
 ## Bower
 
-Install bootstrap and font-awesome<br/>
-Replace references in index.html<br/>
+Install bootstrap and font-awesome  
+Replace references in index.html  
 
 # Angular
 
-https://angularjs.org/
+https://angularjs.org/  
 
 ## Configuration
 
-Install bower packages:<br/><br/>
-angular<br/>
-angular-filter<br/>
-angular-ui-router<br/><br/>
+Install bower packages:  
+angular  
+angular-filter  
+angular-ui-router  
 
 ## Application bootstrap
 
-https://docs.angularjs.org/guide/bootstrap
+https://docs.angularjs.org/guide/bootstrap  
+http://www.codestyle.co/Guidelines/angularjs  
+https://developer.mozilla.org/it/docs/Web/JavaScript/Reference/Strict_mode  
 
-Add app.js file like this:<br/><br/>
+Add app.js file like this:  
 
+``` javascript
 (function(window, angular) {
   'use-strict';
-  angular.module('app', ['ui.router', 'angular.filter', 'mainModule'])
-    .config(['$urlRouterProvider', function($urlRouterProvider) {
-      $urlRouterProvider.otherwise('/');
-    }])
-    .run(['$state', function ($state) {
-      $state.go('main');
+  angular.module('app', [])
+  .controller('mainController', ['$scope', function($scope) {
+      $scope.Title = 'TEST';
     }]);
 })(window, window.angular);
+```
 
 ## Controllers
 
-https://docs.angularjs.org/guide/di<br/>
-https://docs.angularjs.org/guide/controller<br/>
+https://docs.angularjs.org/guide/di  
+https://docs.angularjs.org/guide/controller  
 
-We have defined a default main state named 'main'<br/>
-Add mainModule.js:<br/><br/>
+App module refactoring, removing array annotation  
 
+## UI Router
+
+https://github.com/angular-ui/ui-router/wiki/URL-Routing  
+https://ui-router.github.io/ng1/tutorial/helloworld  
+
+We have defined a default main state named 'main'  
+Add mainModule.js:  
+
+``` javascript
 (function(window, angular) {
   'use-strict';
   angular.module('mainModule', ['ui.router'])
@@ -256,20 +265,16 @@ Add mainModule.js:<br/><br/>
       }
     ]);
 })(window, window.angular);
+```
 
-<br/><br/>Add mainModule.js:<br/><br/>
+Add mainModule.js:  
 
-<br/><br/>We have defined the properties of the state and the controller<br/>
-Add the html page of the state.<br/>
+We have defined the properties of the state and the controller  
+Add the html page of the state.  
 
-## UI Router
-
-https://github.com/angular-ui/ui-router/wiki/URL-Routing<br/>
-https://ui-router.github.io/ng1/tutorial/helloworld<br/>
-
-Create a new page header.html and mode the header<br/>
-Move the menù and the content in main.html page<br/>
-Change the main module like this:<br/><br/>
+Create a new page header.html and mode the header  
+Move the menù and the content in main.html page  
+Change the main module like this:  
 (function(window, angular) {
   'use-strict';
   angular.module('mainModule', ['ui.router'])
