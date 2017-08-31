@@ -313,7 +313,7 @@ We have defined the properties of the state and the controller
 
 https://ui-router.github.io/ng1/tutorial/hellogalaxy  
 
-Add blogsModule and postsModule with html templates, change mainModule  
+* Add blogsModule and postsModule with html templates, change mainModule
 
 ``` javascript
 (function (window, angular) {
@@ -339,42 +339,46 @@ Add blogsModule and postsModule with html templates, change mainModule
 
 ## Factories
 
-https://docs.angularjs.org/guide/services<br/>
+https://docs.angularjs.org/guide/services  
+https://docs.angularjs.org/api/ng/directive/ngRepeat  
 
-Add in blogs.html table a bootstrap table
-Add factory in blogs module
-Add interator in blogs.html page
-Add blog.html page
-Add home.blog state configuration and controller
+* Add in blogs.html table a bootstrap table
+* Add factory in blogs module
+* Add interator in blogs.html page
+* Add blog.html page
+
+https://ui-router.github.io/ng1/tutorial/hellosolarsystem#state-parameters  
+
+* Add home.blog state configuration and controller
 
 ## Blog CRUD Operations
 
-Add list, detail, create, methods to blogService
-Add save, delete methods to blogService
-Fix patch method in ODataController with this row:
-
-_db.Entry(blog).State = EntityState.Modified;
+* Add list, detail, create, methods to blogService
+* Add save, delete methods to blogService
 
 ## Post CRUD Operations
 
-Add list, detail, create, methods to postService
-Add blogModule dependency to postModule, in order to load the blogs list
-Add post.html page
-Add save, delete methods to postService
-Fix patch method in ODataController with this row:
+https://docs.angularjs.org/api/ng/directive/select  
 
-_db.Entry(blog).State = EntityState.Modified;
-
+* Add list, detail, create, methods to postService
+* Add blogModule dependency to postModule, in order to load the blogs list
+* Add post.html page
+* Add save, delete methods to postService
+* Fix patch method in ODataController with this row:
 
 ## Filters
 
-https://docs.angularjs.org/guide/filter<br/>
+https://docs.angularjs.org/guide/filter  
 
-Add search field on top of blogs.html and posts.html
-Add filter in ng-repeat of the pages
+* Add search field on top of blogs.html and posts.html
+* Add filter in ng-repeat of the pages
 
 ## Directives
 
-https://docs.angularjs.org/guide/directive<br/>
+https://docs.angularjs.org/guide/directive  
 
-Add uiSelect directive
+* Add uiSelect directive
+
+## Research material
+
+https://docs.angularjs.org/guide/providers  
