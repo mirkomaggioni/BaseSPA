@@ -48,7 +48,6 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/hosting-aspnet-web-api/
   Add-Migration InitialCreate
   ```
 
-
 # Web Api 2 Web services
 
 https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api  
@@ -292,10 +291,12 @@ We have defined the properties of the state and the controller
   'use-strict';
   angular.module('mainModule', ['ui.router'])
     .config([
-      '$stateProvider', function($stateProvider) {
+      '$stateProvider', function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('blogs');
+
         $stateProvider.state('home',
           {
-            url: '',
+            url: '/',
             views: {
               'header': { templateUrl: 'app/main/header.html' },
               'main': { templateUrl: 'app/main/main.html', controller: 'mainCtrl' }
