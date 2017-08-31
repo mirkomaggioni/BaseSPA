@@ -106,7 +106,10 @@ http://autofac.readthedocs.io/en/latest/getting-started/index.html
 http://autofac.readthedocs.io/en/latest/register/registration.html  
 http://autofac.readthedocs.io/en/latest/configuration/modules.html  
 
-* Install Autofac, Autofac.WebApi2
+* Install these mandatory packages
+  ```
+  Install-Package Autofac.WebApi2.Owin
+  ```
 * Change ContextFactory as non static class
 * Add ModuloCore.cs
 * Add the configuration in Startup.cs file
