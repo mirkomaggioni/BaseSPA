@@ -196,11 +196,18 @@ https://bower.io/
 
 Install nodejs  
 Install bower:  
+``` cmd
 npm install -g bower  
+```
 
 ## Bower
 
-Install bootstrap and font-awesome  
+Install bootstrap and font-awesome:  
+``` cmd
+bower install bootstrap --save  
+bower install components-font-awesome --save  
+```
+
 Replace references in index.html  
 
 # Angular
@@ -210,9 +217,11 @@ https://angularjs.org/
 ## Configuration
 
 Install bower packages:  
-angular  
-angular-filter  
-angular-ui-router  
+``` cmd
+bower install angular --save  
+bower install angular-filter --save  
+bower install angular-ui-router --save  
+```
 
 ## Application bootstrap
 
