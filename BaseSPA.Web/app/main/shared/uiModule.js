@@ -6,10 +6,11 @@
         return {
           restrict: 'E',
           scope: {
-            id: '=',
-            name: '=',
+            id: '@',
+            name: '@',
             options: '=',
-            selectedOption: '='
+            selectedOption: '=',
+            isRequired: '@'
           },
           templateUrl: 'app/main/shared/ui-select.html'
         }
