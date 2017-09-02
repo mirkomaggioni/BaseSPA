@@ -14,7 +14,8 @@
       }
     ])
     .controller('mainCtrl', [
-      '$scope', '$state', function($scope, $state) {
+      '$scope', '$state', function ($scope, $state) {
+        $scope.$state = $state;
         $state.go('home.blogs');
       }
     ]);
