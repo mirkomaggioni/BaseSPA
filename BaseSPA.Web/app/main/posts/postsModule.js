@@ -17,7 +17,7 @@
             });
       }
     ])
-    .factory('postsService', ['$http', function ($http) {
+    .factory('postsService', function ($http) {
       return {
         list: function () {
           return $http.get("/odata/Posts");
@@ -53,8 +53,8 @@
           return $http.delete("/odata/Posts(guid'" + id + "')");
         }
       }
-    }])
-    .controller('postsCtrl', ['$scope', '$state', 'postsService', function ($scope, $state, postsService) {
+    })
+    .controller('postsCtrl', function ($scope, $state, postsService) {
         $scope.new = function () {
           $state.go("home.post", { id: null });
         };
@@ -66,9 +66,8 @@
         postsService.list().then(function (result) {
           $scope.Posts = result.data.value;
         });
-      }
-    ])
-    .controller('postsDetailCtrl', ['$scope', '$state', '$stateParams', 'postsService', 'blogsService', function ($scope, $state, $stateParams, postsService, blogsService) {
+      })
+    .controller('postsDetailCtrl', function ($scope, $state, $stateParams, postsService, blogsService) {
 
       $scope.save = function () {
         if ($scope.Post.Id === undefined) {
@@ -101,5 +100,5 @@
           $scope.Post = result.data;
         });
       }
-    }]);
+    });
 })(window, window.angular);

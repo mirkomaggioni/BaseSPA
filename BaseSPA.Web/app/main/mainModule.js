@@ -1,8 +1,7 @@
 ﻿(function(window, angular) {
   'use-strict';
   angular.module('mainModule', ['ui.router', 'blogsModule', 'postsModule'])
-    .config([
-      '$stateProvider', function ($stateProvider) {
+    .config(function ($stateProvider) {
         var mainState = {
           name: 'home',
           url: '/home',
@@ -13,10 +12,8 @@
         }
 
         $stateProvider.state(mainState);
-      }
-    ])
-    .controller('mainCtrl', ['$scope', '$state', function ($scope, $state) {
+      })
+    .controller('mainCtrl', function ($scope, $state) {
         $scope.$state = $state;
-      }
-    ]);
+      });
 })(window, window.angular)

@@ -1,8 +1,7 @@
 ﻿(function (window, angular) {
   'use-strict';
   angular.module('blogsModule', ['ui.router'])
-    .config([
-      '$stateProvider', function ($stateProvider) {
+    .config(function ($stateProvider) {
         $stateProvider
           .state('home.blogs',
           {
@@ -16,9 +15,8 @@
             templateUrl: 'app/main/blogs/blog.html',
             controller: 'blogsDetailCtrl'
           });
-      }
-    ])
-    .factory('blogsService', ['$http', function ($http) {
+      })
+    .factory('blogsService', function ($http) {
       return {
         list: function () {
           return $http.get("/odata/Blogs");
@@ -54,8 +52,8 @@
           return $http.delete("/odata/Blogs(guid'" + id + "')");
         }
       }
-    }])
-    .controller('blogsCtrl', ['$scope', '$state', 'blogsService', function ($scope, $state, blogsService) {
+    })
+    .controller('blogsCtrl', function ($scope, $state, blogsService) {
 
       $scope.new = function() {
         $state.go("home.blog", { id: null });
@@ -68,8 +66,8 @@
       blogsService.list().then(function (result) {
         $scope.Blogs = result.data.value;
       });
-    }])
-    .controller('blogsDetailCtrl', ['$scope', '$state', '$stateParams', 'blogsService', function ($scope, $state, $stateParams, blogsService) {
+    })
+    .controller('blogsDetailCtrl', function ($scope, $state, $stateParams, blogsService) {
 
       $scope.save = function () {
         if ($scope.Blog.Id === undefined) {
@@ -98,5 +96,5 @@
           $scope.Blog = result.data;
         });  
       }
-    }]);
+    });
 })(window, window.angular);
