@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -11,7 +10,7 @@ using BaseSPA.Core.Models;
 
 namespace BaseSPA.Web.Controllers.OData
 {
-    public class BlogsController : ODataController
+	public class BlogsController : ODataController
     {
 	    private readonly SpaContext _db;
 

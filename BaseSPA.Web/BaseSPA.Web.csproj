@@ -182,6 +182,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Api\BlogsController.cs" />
     <Compile Include="Controllers\OData\BlogsController.cs" />
     <Compile Include="Controllers\OData\PostsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -215,7 +216,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\Api\" />
+    <Folder Include="App_Start\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
