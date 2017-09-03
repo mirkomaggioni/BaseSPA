@@ -126,6 +126,24 @@ http://autofac.readthedocs.io/en/latest/configuration/modules.html
   };
   ```
 
+# Api Documentation with Swagger/Swashbuckle
+
+https://swagger.io/
+https://github.com/domaindrivendev/Swashbuckle
+
+* Install these mandatory packages
+  ```
+  Install-Package Swashbuckle.Core
+  ```
+* Add the configuration in Startup.cs file
+
+  ``` cs
+			config
+				.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
+				.EnableSwaggerUi();
+  ```
+* Fix conflits on same routes with route attribute
+
 # HTML, CSS, Bootstrap
 
 ## HTML

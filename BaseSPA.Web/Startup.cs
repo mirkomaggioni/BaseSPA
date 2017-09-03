@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.OData.Builder;
 using System.Web.Http.OData.Extensions;
@@ -6,8 +7,10 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using BaseSPA.Core;
 using BaseSPA.Core.Models;
+using BaseSPA.Web.Models;
 using Microsoft.Owin;
 using Owin;
+using Swashbuckle.Application;
 
 [assembly: OwinStartup(typeof(BaseSPA.Web.Startup))]
 
@@ -39,6 +42,10 @@ namespace BaseSPA.Web
 				routeTemplate: "api/{controller}/{id}",
 				defaults: new { id = RouteParameter.Optional }
 			);
+
+			config
+				.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
+				.EnableSwaggerUi();
 
 			app.UseWebApi(config);
 		}

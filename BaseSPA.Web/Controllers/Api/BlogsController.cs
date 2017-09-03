@@ -17,6 +17,7 @@ namespace BaseSPA.Web.Controllers.Api
 			}
 		}
 
+		[Route("api/blogs/{id}")]
 		public async Task<IHttpActionResult> Get(Guid id)
 		{
 			using (var db = new SpaContext())
