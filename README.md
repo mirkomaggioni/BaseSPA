@@ -138,8 +138,8 @@ https://github.com/domaindrivendev/Swashbuckle
 * Add the configuration in Startup.cs file
   ``` cs
   config
-	.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
-	.EnableSwaggerUi();
+    .EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
+    .EnableSwaggerUi();
   ```
 * Fix conflits on same routes with route attribute
 
@@ -153,44 +153,50 @@ http://blogs.perficient.com/delivery/blog/2017/06/11/token-based-authentication-
   ```
 * Add the configuration in Startup.cs file
   ``` cs
-  OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+  var oAuthServerOptions = new OAuthAuthorizationServerOptions()
   {
-  	AllowInsecureHttp = true,
-        TokenEndpointPath = new PathString("/token"),
-        AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(60),
-        Provider = new SimpleAuthorizationServerProvider()
+    AllowInsecureHttp = true,
+    TokenEndpointPath = new PathString("/token"),
+    AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(60),
+    Provider = new SimpleAuthorizationServerProvider()
   };
   // Token Generation
-  app.UseOAuthAuthorizationServer(OAuthServerOptions);
+  app.UseOAuthAuthorizationServer(oAuthServerOptions);
   app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
   ```
 * Implementing SimpleAuthorizationServerProvider class
   ``` cs
   public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
+  {
+    public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
     {
-        public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
-        {
-            context.Validated();
-        }
+      context.Validated();
+      return Task.CompletedTask;
+    }
 
-        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
-        {
+    public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+    {
 
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
-            using (AuthRepository _repo = new AuthRepository())
-            {
-                if (context.UserName != "User" || context.Password != "Password")
-                {
-                    context.SetError("invalid_grant", "The user name or password is incorrect.");
-                    return;
-                }
-            }
-            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
-            identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("role", "user"));
-            context.Validated(identity);
-        }
-    }  ```
+      context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+      if (context.UserName != "User" || context.Password != "Password")
+      {
+        context.SetError("invalid_grant", "The user name or password is incorrect.");
+        return Task.CompletedTask;
+      }
+      var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+      identity.AddClaim(new Claim("sub", context.UserName));
+      identity.AddClaim(new Claim("role", "user"));
+      context.Validated(identity);
+      return Task.CompletedTask;
+    }
+  }
+  ```
+* Decore controller or action with [Authorize] attribute
+
+## Tests with Postman
+* authorized controller without token authentication
+* /token (post x-www-form-urlencoded) grant_type:password, username:User, password:Password
+* authorized controller with bearer token
 
 # HTML, CSS, Bootstrap
 

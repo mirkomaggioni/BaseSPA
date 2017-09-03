@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.OData.Builder;
@@ -7,8 +8,8 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using BaseSPA.Core;
 using BaseSPA.Core.Models;
-using BaseSPA.Web.Models;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Swashbuckle.Application;
 
@@ -46,6 +47,17 @@ namespace BaseSPA.Web
 			config
 				.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
 				.EnableSwaggerUi();
+
+			var oAuthServerOptions = new OAuthAuthorizationServerOptions()
+			{
+				AllowInsecureHttp = true,
+				TokenEndpointPath = new PathString("/token"),
+				AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(60),
+				Provider = new SimpleAuthorizationServerProvider()
+			};
+			// Token Generation
+			app.UseOAuthAuthorizationServer(oAuthServerOptions);
+			app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
 			app.UseWebApi(config);
 		}

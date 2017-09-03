@@ -6,6 +6,7 @@ using BaseSPA.Core.Models;
 
 namespace BaseSPA.Web.Controllers.Api
 {
+	[Authorize]
 	[Route("api/blogs")]
 	public class ApiBlogsController : ApiController
 	{
