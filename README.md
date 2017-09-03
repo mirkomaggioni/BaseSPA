@@ -136,13 +136,61 @@ https://github.com/domaindrivendev/Swashbuckle
   Install-Package Swashbuckle.Core
   ```
 * Add the configuration in Startup.cs file
-
   ``` cs
-			config
-				.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
-				.EnableSwaggerUi();
+  config
+	.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
+	.EnableSwaggerUi();
   ```
 * Fix conflits on same routes with route attribute
+
+# Oauth token authentication
+
+http://blogs.perficient.com/delivery/blog/2017/06/11/token-based-authentication-in-web-api-2-via-owin/
+
+* Install these mandatory packages
+  ```
+  Install-Package Microsoft.Owin.Security.OAuth
+  ```
+* Add the configuration in Startup.cs file
+  ``` cs
+  OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+  {
+  	AllowInsecureHttp = true,
+        TokenEndpointPath = new PathString("/token"),
+        AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(60),
+        Provider = new SimpleAuthorizationServerProvider()
+  };
+  // Token Generation
+  app.UseOAuthAuthorizationServer(OAuthServerOptions);
+  app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
+  ```
+* Implementing SimpleAuthorizationServerProvider class
+  ``` cs
+  public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
+    {
+        public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+        {
+            context.Validated();
+        }
+
+        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        {
+
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
+            using (AuthRepository _repo = new AuthRepository())
+            {
+                if (context.UserName != "User" || context.Password != "Password")
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
+            }
+            var identity = new ClaimsIdentity(context.Options.AuthenticationType);
+            identity.AddClaim(new Claim("sub", context.UserName));
+            identity.AddClaim(new Claim("role", "user"));
+            context.Validated(identity);
+        }
+    }  ```
 
 # HTML, CSS, Bootstrap
 
