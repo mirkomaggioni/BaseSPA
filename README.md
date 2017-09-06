@@ -373,27 +373,23 @@ We have defined the properties of the state and the controller
 ``` javascript
 (function(window, angular) {
   'use-strict';
-  angular.module('mainModule', ['ui.router'])
-    .config([
-      '$stateProvider', function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('blogs');
+  angular.module('mainModule', ['ui.router', 'blogsModule', 'postsModule'])
+    .config(function ($stateProvider) {
+        var mainState = {
+          name: 'home',
+          url: '/home',
+          views: {
+            'header': { templateUrl: 'app/main/header.html' },
+            'main': { templateUrl: 'app/main/main.html', controller: 'mainCtrl' }
+          }
+        }
 
-        $stateProvider.state('home',
-          {
-            url: '/',
-            views: {
-              'header': { templateUrl: 'app/main/header.html' },
-              'main': { templateUrl: 'app/main/main.html', controller: 'mainCtrl' }
-            }
-          });
-      }
-    ])
-    .controller('mainCtrl', [
-      '$scope', function($scope) {
-        $scope.Titolo = "homepage";
-      }
-    ]);
-})(window, window.angular);
+        $stateProvider.state(mainState);
+      })
+    .controller('mainCtrl', function ($scope, $state) {
+        $scope.$state = $state;
+      });
+})(window, window.angular)
 ```
 
 https://ui-router.github.io/ng1/tutorial/hellogalaxy  
