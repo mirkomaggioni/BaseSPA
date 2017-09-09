@@ -28,14 +28,14 @@ namespace BaseSPA.Web.Controllers.OData
 
         // GET: odata/Posts(5)
         [EnableQuery]
-        public SingleResult<Post> GetPost([FromODataUri] Guid key)
+        public SingleResult<Post> GetPost(Guid key)
         {
             return SingleResult.Create(_db.Posts.Where(post => post.Id == key));
         }
 
 		// PATCH: odata/Posts(5)
 	    [AcceptVerbs("PATCH", "MERGE")]
-	    public async Task<IHttpActionResult> Patch([FromODataUri] Guid key, Delta<Post> patch)
+	    public async Task<IHttpActionResult> Patch(Guid key, Delta<Post> patch)
 	    {
 		    Validate(patch.GetInstance());
 
@@ -75,7 +75,7 @@ namespace BaseSPA.Web.Controllers.OData
         }
 
         // DELETE: odata/Posts(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] Guid key)
+        public async Task<IHttpActionResult> Delete(Guid key)
         {
             Post post = await _db.Posts.FindAsync(key);
             if (post == null)
@@ -91,7 +91,7 @@ namespace BaseSPA.Web.Controllers.OData
 
         // GET: odata/Posts(5)/Blog
         [EnableQuery]
-        public SingleResult<Blog> GetBlog([FromODataUri] Guid key)
+        public SingleResult<Blog> GetBlog(Guid key)
         {
             return SingleResult.Create(_db.Posts.Where(m => m.Id == key).Select(m => m.Blog));
         }
