@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Reflection;
 using System.Web.Http;
-using System.Web.Http.OData.Builder;
-using System.Web.Http.OData.Extensions;
+using System.Web.OData.Builder;
+using System.Web.OData.Extensions;
 using Autofac;
 using Autofac.Integration.WebApi;
 using BaseSPA.Core;
@@ -31,11 +30,6 @@ namespace BaseSPA.Web
 				DependencyResolver = new AutofacWebApiDependencyResolver(container)
 			};
 
-			var builder = new ODataConventionModelBuilder();
-			builder.EntitySet<Blog>("Blogs");
-			builder.EntitySet<Post>("Posts");
-			config.Routes.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
-
 			config.MapHttpAttributeRoutes();
 
 			config.Routes.MapHttpRoute(
@@ -43,6 +37,11 @@ namespace BaseSPA.Web
 				routeTemplate: "api/{controller}/{id}",
 				defaults: new { id = RouteParameter.Optional }
 			);
+
+			var builder = new ODataConventionModelBuilder();
+			builder.EntitySet<Blog>("Blogs");
+			builder.EntitySet<Post>("Posts");
+			config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 
 			config
 				.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
