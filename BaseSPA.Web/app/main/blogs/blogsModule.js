@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('blogsModule', ['ui.router'])
+  angular.module('blogsModule', ['ui.router', 'ODataResources'])
     .config(function ($stateProvider) {
         $stateProvider
           .state('home.blogs',
@@ -16,44 +16,25 @@
             controller: 'blogsDetailCtrl'
           });
       })
-    .factory('blogsService', function ($http) {
-      return {
-        list: function () {
-          return $http.get("/odata/Blogs");
-        },
-        detail: function (id) {
-          return $http.get("/odata/Blogs(guid'" + id + "')");
-        },
-        create: function (blog) {
-          var req = {
-            method: 'POST',
-            url: '/odata/Blogs',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            data: blog
-          };
+    .factory('blogsResource', function ($odataresource, $http) {
+      var blog = $odataresource('/odata/Blogs', {}, {}, {
+        odatakey: 'Id',
+        isodatav4: true
+      });
 
-          return $http(req);
-        },
-        save: function (blog) {
-          var req = {
-            method: 'PATCH',
-            url: '/odata/Blogs(guid\'' + blog.Id + '\')',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            data: blog
-          };
+      angular.extend(blog.prototype, {'$patch': function() {
+        var req = {
+          method: 'PATCH',
+          url: '/odata/Blogs(' + this.Id + ')',
+          data: this
+        };
 
-          return $http(req);
-        },
-        delete: function (id) {
-          return $http.delete("/odata/Blogs(guid'" + id + "')");
-        }
-      }
+        return $http(req);
+      }});
+
+      return blog;
     })
-    .controller('blogsCtrl', function ($scope, $state, blogsService) {
+    .controller('blogsCtrl', function ($scope, $state, blogsResource) {
 
       $scope.new = function() {
         $state.go("home.blog", { id: null });
@@ -63,38 +44,40 @@
         $state.go("home.blog", { id: id });
       };
 
-      blogsService.list().then(function (result) {
-        $scope.Blogs = result.data.value;
-      });
+      $scope.Blogs = blogsResource.odata().query();
     })
-    .controller('blogsDetailCtrl', function ($scope, $state, $stateParams, blogsService) {
+    .controller('blogsDetailCtrl', function ($scope, $state, blogsResource) {
+      var isNew = $state.params.id === '';
+
+      var load = function (id) {
+        if (isNew) {
+          $scope.Blog = new blogsResource();
+        } else {
+          $scope.Blog = blogsResource.odata().get(id);
+        }
+      };
 
       $scope.save = function () {
-        if ($scope.Blog.Id === undefined) {
-          blogsService.create($scope.Blog).then(function (result) {
-            $scope.Blog = result.data;
+        if (isNew) {
+          $scope.Blog.$save(function(data) {
+            isNew = false;
+            load(data.Id);
           });
         } else {
-          blogsService.save($scope.Blog).then(function () {});
+          $scope.Blog.$patch();
         };
       };
 
-      $scope.delete = function() {
-        blogsService.delete($scope.Blog.Id).then(function() {
-          $state.go("home.blogs");
+      $scope.delete = function () {
+        $scope.Blog.$delete(function () {
+          $scope.close();
         });
-      }
+      };
 
       $scope.close = function () {
         $state.go("home.blogs");
       };
 
-      if ($stateParams.id == '') {
-        $scope.Blog = { Name: '', Url: '' }  
-      } else {
-        blogsService.detail($stateParams.id).then(function (result) {
-          $scope.Blog = result.data;
-        });  
-      }
+      load($state.params.id);
     });
 })(window, window.angular);
