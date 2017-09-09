@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.OData;
+using System.Web.OData;
 using BaseSPA.Core;
 using BaseSPA.Core.Models;
 
@@ -38,7 +37,7 @@ namespace BaseSPA.Web.Controllers.OData
 	    [AcceptVerbs("PATCH", "MERGE")]
 	    public async Task<IHttpActionResult> Patch([FromODataUri] Guid key, Delta<Post> patch)
 	    {
-		    Validate(patch.GetEntity());
+		    Validate(patch.GetInstance());
 
 		    if (!ModelState.IsValid)
 		    {

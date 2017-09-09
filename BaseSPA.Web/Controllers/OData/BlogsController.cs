@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.OData;
+using System.Web.OData;
 using BaseSPA.Core;
 using BaseSPA.Core.Models;
 
@@ -28,16 +28,16 @@ namespace BaseSPA.Web.Controllers.OData
 
 		// GET: odata/Blogs(5)
 		[EnableQuery]
-        public SingleResult<Blog> GetBlog([FromODataUri] Guid key)
+        public SingleResult<Blog> GetBlog(Guid key)
         {
 			return SingleResult.Create(_db.Blogs.Where(b => b.Id == key));
 		}
 
 		// PATCH: odata/Blogs1(5)
 		[AcceptVerbs("PATCH", "MERGE")]
-	    public async Task<IHttpActionResult> Patch([FromODataUri] Guid key, Delta<Blog> patch)
+	    public async Task<IHttpActionResult> Patch(Guid key, Delta<Blog> patch)
 	    {
-		    Validate(patch.GetEntity());
+		    Validate(patch.GetInstance());
 
 		    if (!ModelState.IsValid)
 		    {
@@ -75,7 +75,7 @@ namespace BaseSPA.Web.Controllers.OData
 		}
 
         // DELETE: odata/Blogs(5)
-        public async Task<IHttpActionResult> Delete([FromODataUri] Guid key)
+        public async Task<IHttpActionResult> Delete(Guid key)
         {
 	        var entity = await _db.Blogs.FindAsync(key);
 	        if (entity == null)
