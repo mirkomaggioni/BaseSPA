@@ -42,6 +42,7 @@ namespace BaseSPA.Web
 			builder.EntitySet<Blog>("Blogs");
 			builder.EntitySet<Post>("Posts");
 			config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
+			config.Filter().Expand().Select().OrderBy().MaxTop(null).Count();
 
 			config
 				.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
