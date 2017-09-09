@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('postsModule', ['ui.router', 'blogsModule', 'uiModule'])
+  angular.module('postsModule', ['ui.router', 'ODataResources', 'blogsModule', 'uiModule'])
     .config([
       '$stateProvider', function ($stateProvider) {
         $stateProvider.state('home.posts',
@@ -17,44 +17,27 @@
             });
       }
     ])
-    .factory('postsService', function ($http) {
-      return {
-        list: function () {
-          return $http.get("/odata/Posts");
-        },
-        detail: function (id) {
-          return $http.get("/odata/Posts(guid'" + id + "')");
-        },
-        create: function (post) {
-          var req = {
-            method: 'POST',
-            url: '/odata/Posts',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            data: post
-          };
+    .factory('postsResource', function ($odataresource, $http) {
+      var post = $odataresource('/odata/Posts', {}, {}, {
+        odatakey: 'Id',
+        isodatav4: true
+      });
 
-          return $http(req);
-        },
-        save: function (post) {
+      angular.extend(post.prototype, {
+        '$patch': function () {
           var req = {
             method: 'PATCH',
-            url: '/odata/Posts(guid\'' + post.Id + '\')',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            data: post
+            url: '/odata/Posts(' + this.Id + ')',
+            data: this
           };
 
           return $http(req);
-        },
-        delete: function (id) {
-          return $http.delete("/odata/Posts(guid'" + id + "')");
         }
-      }
+      });
+
+      return post;
     })
-    .controller('postsCtrl', function ($scope, $state, postsService) {
+    .controller('postsCtrl', function ($scope, $state, postsResource) {
         $scope.new = function () {
           $state.go("home.post", { id: null });
         };
@@ -63,25 +46,34 @@
           $state.go("home.post", { id: id });
         };
 
-        postsService.list().then(function (result) {
-          $scope.Posts = result.data.value;
-        });
+        $scope.Posts = postsResource.odata().query();
       })
-    .controller('postsDetailCtrl', function ($scope, $state, $stateParams, postsService, blogsService) {
+    .controller('postsDetailCtrl', function ($scope, $state, $stateParams, postsResource, blogsResource) {
+      var isNew = $state.params.id === '';
+
+      var load = function (id) {
+        $scope.Blogs = blogsResource.odata().query();
+        if (isNew) {
+          $scope.Post = new postsResource();
+        } else {
+          $scope.Post = postsResource.odata().get(id);
+        }
+      };
 
       $scope.save = function () {
-        if ($scope.Post.Id === undefined) {
-          postsService.create($scope.Post).then(function (result) {
-            $scope.Post = result.data;
+        if (isNew) {
+          $scope.Post.$save(function (data) {
+            isNew = false;
+            load(data.Id);
           });
         } else {
-          postsService.save($scope.Post).then(function () { });
-        };
+          $scope.Post.$patch();
+        }
       };
 
       $scope.delete = function () {
-        postsService.delete($scope.Post.Id).then(function () {
-          $state.go("home.posts");
+        $scope.Post.$delete(function () {
+          $scope.close();
         });
       }
 
@@ -89,16 +81,6 @@
         $state.go("home.posts");
       };
 
-      blogsService.list().then(function (result) {
-        $scope.Blogs = result.data.value;
-      });
-
-      if ($stateParams.id == '') {
-        $scope.Post = { Title: '', Content: '' }
-      } else {
-        postsService.detail($stateParams.id).then(function (result) {
-          $scope.Post = result.data;
-        });
-      }
+      load($state.params.id);
     });
 })(window, window.angular);
