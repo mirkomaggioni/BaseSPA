@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('postsModule', ['ui.router', 'ODataResources', 'blogsModule', 'uiModule'])
+  angular.module('postsModule', ['ui.router', 'ODataResources', 'blogsModule', 'uiModule', 'odataResourcesModule'])
     .config([
       '$stateProvider', function ($stateProvider) {
         $stateProvider.state('home.posts',
@@ -17,27 +17,10 @@
             });
       }
     ])
-    .factory('postsResource', function ($odataresource, $http) {
-      var post = $odataresource('/odata/Posts', {}, {}, {
-        odatakey: 'Id',
-        isodatav4: true
-      });
-
-      angular.extend(post.prototype, {
-        '$patch': function () {
-          var req = {
-            method: 'PATCH',
-            url: '/odata/Posts(' + this.Id + ')',
-            data: this
-          };
-
-          return $http(req);
-        }
-      });
-
-      return post;
+    .factory('postsService', function ($odataresource, $http, odataGenericResource) {
+      return new odataGenericResource('odata', 'Posts', 'Id');
     })
-    .controller('postsCtrl', function ($scope, $state, postsResource) {
+    .controller('postsCtrl', function ($scope, $state, postsService) {
         $scope.new = function () {
           $state.go("home.post", { id: null });
         };
@@ -46,17 +29,17 @@
           $state.go("home.post", { id: id });
         };
 
-        $scope.Posts = postsResource.odata().query();
+        $scope.Posts = postsService.getOdataResource().query();
       })
-    .controller('postsDetailCtrl', function ($scope, $state, $stateParams, postsResource, blogsResource) {
+    .controller('postsDetailCtrl', function ($scope, $state, $stateParams, postsService, blogsService) {
       var isNew = $state.params.id === '';
 
       var load = function (id) {
-        $scope.Blogs = blogsResource.odata().query();
+        $scope.Blogs = blogsService.getOdataResource().query();
         if (isNew) {
-          $scope.Post = new postsResource();
+          $scope.Post = postsService.create();
         } else {
-          $scope.Post = postsResource.odata().get(id);
+          $scope.Post = postsService.getOdataResource().get(id);
         }
       };
 

@@ -29,7 +29,7 @@
         $state.go("home.blog", { id: id });
       };
 
-      $scope.Blogs = blogsService.getOdataResource().odata().query();
+      $scope.Blogs = blogsService.getOdataResource().query();
     })
     .controller('blogsDetailCtrl', function ($scope, $state, blogsService) {
       var isNew = $state.params.id === '';
@@ -38,7 +38,7 @@
         if (isNew) {
           $scope.Blog = blogsService.create();
         } else {
-          $scope.Blog = blogsService.getOdataResource().odata().get(id);
+          $scope.Blog = blogsService.getOdataResource().get(id);
         }
       };
 

@@ -16,7 +16,7 @@
           '$patch': function() {
             var req = {
               method: 'PATCH',
-              url: '/odata/Blogs(' + this.Id + ')',
+              url: serviceRootUrl + '/' + resourcePath + '(' + this.Id + ')',
               data: this
             };
 
@@ -26,7 +26,7 @@
       }
 
       odataGenericResource.prototype.getOdataResource = function () {
-        return this._odataResource;
+        return this._odataResource.odata();
       }
 
       odataGenericResource.prototype.create = function () {
