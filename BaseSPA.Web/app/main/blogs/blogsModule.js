@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('blogsModule', ['ui.router', 'ODataResources'])
+  angular.module('blogsModule', ['ui.router', 'ODataResources', 'odataResourcesModule'])
     .config(function ($stateProvider) {
         $stateProvider
           .state('home.blogs',
@@ -16,25 +16,10 @@
             controller: 'blogsDetailCtrl'
           });
       })
-    .factory('blogsResource', function ($odataresource, $http) {
-      var blog = $odataresource('/odata/Blogs', {}, {}, {
-        odatakey: 'Id',
-        isodatav4: true
-      });
-
-      angular.extend(blog.prototype, {'$patch': function() {
-        var req = {
-          method: 'PATCH',
-          url: '/odata/Blogs(' + this.Id + ')',
-          data: this
-        };
-
-        return $http(req);
-      }});
-
-      return blog;
+    .factory('blogsService', function ($odataresource, $http, odataGenericResource) {
+      return new odataGenericResource('odata', 'Blogs', 'Id');
     })
-    .controller('blogsCtrl', function ($scope, $state, blogsResource) {
+    .controller('blogsCtrl', function ($scope, $state, blogsService) {
 
       $scope.new = function() {
         $state.go("home.blog", { id: null });
@@ -44,16 +29,16 @@
         $state.go("home.blog", { id: id });
       };
 
-      $scope.Blogs = blogsResource.odata().query();
+      $scope.Blogs = blogsService.getOdataResource().odata().query();
     })
-    .controller('blogsDetailCtrl', function ($scope, $state, blogsResource) {
+    .controller('blogsDetailCtrl', function ($scope, $state, blogsService) {
       var isNew = $state.params.id === '';
 
       var load = function (id) {
         if (isNew) {
-          $scope.Blog = new blogsResource();
+          $scope.Blog = blogsService.create();
         } else {
-          $scope.Blog = blogsResource.odata().get(id);
+          $scope.Blog = blogsService.getOdataResource().odata().get(id);
         }
       };
 
