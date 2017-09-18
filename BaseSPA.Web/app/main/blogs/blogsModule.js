@@ -33,19 +33,19 @@
     })
     .controller('blogsDetailCtrl', function ($scope, $state, blogsService) {
       var load = function (id) {
-        blogsService.get(id, function(data) {
+        blogsService.get(id).then(function(data) {
           $scope.Blog = data;
         });
       };
 
       $scope.save = function () {
-        blogsService.save($scope.Blog, function(data) {
+        blogsService.save($scope.Blog).then(function(data) {
           load(data.Id);
         });
       }
 
       $scope.delete = function () {
-        blogsService.delete($scope.Blog, function () {
+        blogsService.delete($scope.Blog).then(function () {
           $scope.close();
         });
       };
