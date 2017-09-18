@@ -103,33 +103,10 @@
       return odataResource;
     })
 
-    .factory('odataGenericResource', function ($odataresource, $http, $q, odataResource) {
+    .factory('odataGenericResource', function ($q, odataResource) {
 
       function odataGenericResource(serviceRootUrl, resourcePath, key) {
         this.odataResource = new odataResource(serviceRootUrl, resourcePath, key);
-      }
-
-      odataGenericResource.prototype.getObjectToUpdate = function (resource) {
-        var object = this.odataResource.new();
-        object[this.odataResource.key] = resource[this.odataResource.key];
-
-        for (var propertyName in resource) {
-          if (propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
-            object[propertyName] = resource[propertyName];
-          }
-        }
-
-        return object;
-      }
-
-      odataGenericResource.prototype.restore = function (resource) {
-        for (var propertyName in resource) {
-          if (propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
-            resource[propertyName] = resource._originalResource[propertyName];
-          }
-        }
-
-        return resource;
       }
 
       odataGenericResource.prototype.getOdataResource = function() {
@@ -147,14 +124,17 @@
         }
       }
 
-      odataGenericResource.prototype.save = function (resource) {
+      odataGenericResource.prototype.save = function(resource) {
         if (!resource._originalResource) {
           return this.odataResource.add(resource);
+        } else if (this.isChanged(resource)) {
+          var object = this.getObjectToUpdate(resource);
+          return this.odataResource.update(object);
         } else {
-          if (this.isChanged(resource)) {
-            var object = this.getObjectToUpdate(resource);
-            return this.odataResource.update(object);
-          }
+          var defer = $q.defer();
+          defer.resolve(resource);
+
+          return defer.promise;
         }
       }
 
@@ -165,12 +145,35 @@
       odataGenericResource.prototype.isChanged = function (resource) {
         var isChanged = false;
         for (var propertyName in resource) {
-          if (propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
+          if (propertyName !== '$promise' && propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
             isChanged = true;
           }
         }
 
         return isChanged;
+      }
+
+      odataGenericResource.prototype.getObjectToUpdate = function (resource) {
+        var object = this.odataResource.new();
+        object[this.odataResource.key] = resource[this.odataResource.key];
+
+        for (var propertyName in resource) {
+          if (propertyName !== '$promise' && propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
+            object[propertyName] = resource[propertyName];
+          }
+        }
+
+        return object;
+      }
+
+      odataGenericResource.prototype.restore = function (resource) {
+        for (var propertyName in resource) {
+          if (propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
+            resource[propertyName] = resource._originalResource[propertyName];
+          }
+        }
+
+        return resource;
       }
 
       return odataGenericResource;
