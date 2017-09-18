@@ -24,7 +24,7 @@
               data: this
             };
 
-            return $http(req).then(function (data) {
+            $http(req).then(function (data) {
               defer.resolve(data);
             }, function (error) {
               defer.reject(error);
