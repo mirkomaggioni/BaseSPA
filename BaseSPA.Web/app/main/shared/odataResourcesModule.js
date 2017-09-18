@@ -122,6 +122,16 @@
         return object;
       }
 
+      odataGenericResource.prototype.restore = function (resource) {
+        for (var propertyName in resource) {
+          if (propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
+            resource[propertyName] = resource._originalResource[propertyName];
+          }
+        }
+
+        return resource;
+      }
+
       odataGenericResource.prototype.getOdataResource = function() {
         return this.odataResource.getResource();
       }
