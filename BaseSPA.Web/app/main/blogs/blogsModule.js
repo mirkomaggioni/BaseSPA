@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('blogsModule', ['ui.router', 'ODataResources', 'odataResourcesModule'])
+  angular.module('blogsModule', ['ui.router', 'odataResourcesModule'])
     .config(function ($stateProvider) {
         $stateProvider
           .state('home.blogs',
@@ -16,7 +16,7 @@
             controller: 'blogsDetailCtrl'
           });
       })
-    .factory('blogsService', function ($odataresource, $http, odataGenericResource) {
+    .factory('blogsService', function ($http, odataGenericResource) {
       return new odataGenericResource('odata', 'Blogs', 'Id');
     })
     .controller('blogsCtrl', function ($scope, $state, blogsService) {

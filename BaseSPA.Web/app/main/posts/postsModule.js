@@ -1,6 +1,6 @@
 ﻿(function (window, angular) {
   'use-strict';
-  angular.module('postsModule', ['ui.router', 'ODataResources', 'blogsModule', 'uiModule', 'odataResourcesModule'])
+  angular.module('postsModule', ['ui.router', 'blogsModule', 'uiModule', 'odataResourcesModule'])
     .config([
       '$stateProvider', function ($stateProvider) {
         $stateProvider.state('home.posts',
@@ -17,7 +17,7 @@
             });
       }
     ])
-    .factory('postsService', function ($odataresource, $http, odataGenericResource) {
+    .factory('postsService', function ($http, odataGenericResource) {
       return new odataGenericResource('odata', 'Posts', 'Id');
     })
     .controller('postsCtrl', function ($scope, $state, postsService) {
@@ -32,30 +32,22 @@
         $scope.Posts = postsService.getOdataResource().query();
       })
     .controller('postsDetailCtrl', function ($scope, $state, $stateParams, postsService, blogsService) {
-      var isNew = $state.params.id === '';
-
       var load = function (id) {
         $scope.Blogs = blogsService.getOdataResource().query();
-        if (isNew) {
-          $scope.Post = postsService.create();
-        } else {
-          $scope.Post = postsService.getOdataResource().get(id);
-        }
+
+        postsService.get(id).then(function (data) {
+          $scope.Post = data;
+        });
       };
 
       $scope.save = function () {
-        if (isNew) {
-          $scope.Post.$save(function (data) {
-            isNew = false;
-            load(data.Id);
-          });
-        } else {
-          $scope.Post.$patch();
-        }
+        postsService.save($scope.Post).then(function (data) {
+          load(data.Id);
+        });
       };
 
       $scope.delete = function () {
-        $scope.Post.$delete(function () {
+        blogsService.delete($scope.Post).then(function () {
           $scope.close();
         });
       }
