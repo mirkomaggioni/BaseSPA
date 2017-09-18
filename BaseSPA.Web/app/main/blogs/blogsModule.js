@@ -32,29 +32,20 @@
       $scope.Blogs = blogsService.getOdataResource().query();
     })
     .controller('blogsDetailCtrl', function ($scope, $state, blogsService) {
-      var isNew = $state.params.id === '';
-
       var load = function (id) {
-        if (isNew) {
-          $scope.Blog = blogsService.create();
-        } else {
-          $scope.Blog = blogsService.getOdataResource().get(id);
-        }
+        blogsService.get(id, function(data) {
+          $scope.Blog = data;
+        });
       };
 
       $scope.save = function () {
-        if (isNew) {
-          $scope.Blog.$save(function(data) {
-            isNew = false;
-            load(data.Id);
-          });
-        } else {
-          $scope.Blog.$patch();
-        };
-      };
+        blogsService.save($scope.Blog, function(data) {
+          load(data.Id);
+        });
+      }
 
       $scope.delete = function () {
-        $scope.Blog.$delete(function () {
+        blogsService.delete($scope.Blog, function () {
           $scope.close();
         });
       };
