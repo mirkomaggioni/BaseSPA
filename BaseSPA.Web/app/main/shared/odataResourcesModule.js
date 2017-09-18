@@ -1,15 +1,13 @@
 ﻿(function(window, angular) {
   'use-strict';
-  angular.module('odataResourcesModule', ['ui.router', 'cb.x2js', 'ODataResources'])
+  angular.module('odataResourcesModule', ['ui.router', 'ODataResources'])
     
-    .factory('odataGenericResource', function ($odataresource, $http, odataMetadataService) {
+    .factory('odataGenericResource', function ($odataresource, $http) {
 
       function odataGenericResource(serviceRootUrl, resourcePath, key) {
         this.serviceRootUrl = serviceRootUrl;
         this.resourcePath = resourcePath;
         this.key = key;
-        this.metadataService = odataMetadataService(serviceRootUrl);
-        this._originalResource = null;
 
         this._odataResource = $odataresource(serviceRootUrl + '/' + resourcePath, {}, {}, {
           odatakey: key,
@@ -39,12 +37,10 @@
 
       odataGenericResource.prototype.get = function (id, callback, callbackErr) {
         if (id === '') {
-          this._originalResource = null;
           callback.call(this, new this._odataResource());
         } else {
-          var self = this;
           this.getOdataResource().get(id, function (data) {
-            self._originalResource = angular.copy(data);
+            data._originalResource = angular.copy(data);
             callback.call(this, data);
           },
             callbackErr);
@@ -52,10 +48,9 @@
       }
 
       odataGenericResource.prototype.save = function (resource, callback, callbackErr) {
-        if (!this._originalResource) {
-          var self = this;
+        if (!resource._originalResource) {
           resource.$save(function (data) {
-              self._originalResource = angular.copy(data);
+              data._originalResource = angular.copy(data);
               callback.call(this, data);
             },
           callbackErr);
@@ -66,7 +61,7 @@
           var isChanged = false;
           for (var propertyName in resource)
           {
-            if (this._originalResource[propertyName] !== resource[propertyName]) {
+            if (propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
               object[propertyName] = resource[propertyName];
               isChanged = true;
             }
