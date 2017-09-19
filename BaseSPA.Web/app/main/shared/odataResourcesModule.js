@@ -109,6 +109,10 @@
         this.odataResource = new odataResource(serviceRootUrl, resourcePath, key);
       }
 
+      var isEntityProperty = function (propertyName) {
+        return (propertyName !== '$promise' && propertyName !== '_originalResource');
+      }
+
       odataGenericResource.prototype.getOdataResource = function() {
         return this.odataResource.getResource();
       }
@@ -145,7 +149,7 @@
       odataGenericResource.prototype.isChanged = function (resource) {
         var isChanged = false;
         for (var propertyName in resource) {
-          if (propertyName !== '$promise' && propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
+          if (isEntityProperty(propertyName) && resource._originalResource[propertyName] !== resource[propertyName]) {
             isChanged = true;
           }
         }
@@ -158,7 +162,7 @@
         object[this.odataResource.key] = resource[this.odataResource.key];
 
         for (var propertyName in resource) {
-          if (propertyName !== '$promise' && propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
+          if (isEntityProperty(propertyName) && resource._originalResource[propertyName] !== resource[propertyName]) {
             object[propertyName] = resource[propertyName];
           }
         }
@@ -168,7 +172,7 @@
 
       odataGenericResource.prototype.restore = function (resource) {
         for (var propertyName in resource) {
-          if (propertyName !== '_originalResource' && resource._originalResource[propertyName] !== resource[propertyName]) {
+          if (isEntityProperty(propertyName) && resource._originalResource[propertyName] !== resource[propertyName]) {
             resource[propertyName] = resource._originalResource[propertyName];
           }
         }
