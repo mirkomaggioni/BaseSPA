@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Threading.Tasks;
 using System.Web.Http;
+using BaseSPA.Core;
 using BaseSPA.Core.Models;
 
 namespace BaseSPA.Web.Controllers.Api
@@ -10,9 +11,16 @@ namespace BaseSPA.Web.Controllers.Api
 	[Route("api/blogs")]
 	public class ApiBlogsController : ApiController
 	{
+		private readonly ContextFactory _contextFactory;
+
+		public ApiBlogsController(ContextFactory contextFactory)
+		{
+			_contextFactory = contextFactory;
+		}
+
 		public async Task<IHttpActionResult> Get()
 		{
-			using (var db = new SpaContext())
+			using (var db = _contextFactory.GetContext<SpaContext>())
 			{
 				return Ok(await db.Blogs.ToListAsync());
 			}
@@ -21,7 +29,7 @@ namespace BaseSPA.Web.Controllers.Api
 		[Route("api/blogs/{id}")]
 		public async Task<IHttpActionResult> Get(Guid id)
 		{
-			using (var db = new SpaContext())
+			using (var db = _contextFactory.GetContext<SpaContext>())
 			{
 				var blog = await db.Blogs
 					.FirstOrDefaultAsync(e => e.Id == id);
@@ -33,7 +41,7 @@ namespace BaseSPA.Web.Controllers.Api
 
 		public async Task<IHttpActionResult> Post(Blog blog)
 		{
-			using (var db = new SpaContext())
+			using (var db = _contextFactory.GetContext<SpaContext>())
 			{
 				db.Blogs.Add(blog);
 				await db.SaveChangesAsync();
@@ -43,7 +51,7 @@ namespace BaseSPA.Web.Controllers.Api
 
 		public async Task<IHttpActionResult> Delete(Guid id)
 		{
-			using (var db = new SpaContext())
+			using (var db = _contextFactory.GetContext<SpaContext>())
 			{
 				var blog = await db.Blogs
 					.FirstOrDefaultAsync(e => e.Id == id);
@@ -59,9 +67,8 @@ namespace BaseSPA.Web.Controllers.Api
 		{
 			if (id != blog.Id)
 				return BadRequest();
-			using (var db = new SpaContext())
+			using (var db = _contextFactory.GetContext<SpaContext>())
 			{
-				db.Configuration.ProxyCreationEnabled = false;
 				db.Entry(blog).State = EntityState.Modified;
 				await db.SaveChangesAsync();
 				return Ok(blog);
