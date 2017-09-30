@@ -35,7 +35,7 @@ namespace BaseSPA.Web
 			config.Routes.MapHttpRoute(
 				name: "DefaultApi",
 				routeTemplate: "api/{controller}/{id}",
-				defaults: new { id = RouteParameter.Optional }
+				defaults: new {id = RouteParameter.Optional}
 			);
 
 			var builder = new ODataConventionModelBuilder();
@@ -44,9 +44,13 @@ namespace BaseSPA.Web
 			config.MapODataServiceRoute("odata", "odata", builder.GetEdmModel());
 			config.Filter().Expand().Select().OrderBy().MaxTop(null).Count();
 
-			config
-				.EnableSwagger(c => c.SingleApiVersion("v1", "BaseSPA"))
-				.EnableSwaggerUi();
+			config.EnableSwagger(c =>
+				{
+					c.SingleApiVersion("v1", "BaseSPA.Web");
+					c.OperationFilter<SwaggerFilter>();
+					c.PrettyPrint();
+					c.IgnoreObsoleteActions();
+				}).EnableSwaggerUi();
 
 			var oAuthServerOptions = new OAuthAuthorizationServerOptions()
 			{
