@@ -63,6 +63,10 @@
     <Compile Include="Migrations\201707170647039_aggiunto-proprietà-nome-a-blog.Designer.cs">
       <DependentUpon>201707170647039_aggiunto-proprietà-nome-a-blog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802191331484_prove-sulle-date.cs" />
+    <Compile Include="Migrations\201802191331484_prove-sulle-date.Designer.cs">
+      <DependentUpon>201802191331484_prove-sulle-date.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Blog.cs" />
     <Compile Include="Models\SpaContext.cs" />
@@ -72,7 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201707051113471_migrazione-iniziale.resx">
@@ -83,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707170647039_aggiunto-proprietà-nome-a-blog.resx">
       <DependentUpon>201707170647039_aggiunto-proprietà-nome-a-blog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802191331484_prove-sulle-date.resx">
+      <DependentUpon>201802191331484_prove-sulle-date.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

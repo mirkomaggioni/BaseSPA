@@ -7,7 +7,7 @@ using BaseSPA.Core.Models;
 
 namespace BaseSPA.Web.Controllers.Api
 {
-	[Authorize]
+	//[Authorize]
 	[Route("api/blogs")]
 	public class ApiBlogsController : ApiController
 	{

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http.Formatting;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.OData.Builder;
@@ -9,17 +10,18 @@ using BaseSPA.Core;
 using BaseSPA.Core.Models;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using Owin;
 using Swashbuckle.Application;
 
 [assembly: OwinStartup(typeof(BaseSPA.Web.Startup))]
-
 namespace BaseSPA.Web
 {
 	public class Startup
 	{
 		public void Configuration(IAppBuilder app)
 		{
+
 			var containerBuilder = new ContainerBuilder();
 			containerBuilder.RegisterModule(new ModuloCore());
 			containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
@@ -52,6 +54,10 @@ namespace BaseSPA.Web
 					c.IgnoreObsoleteActions();
 				}).EnableSwaggerUi();
 
+			// JSON formatter
+			JsonMediaTypeFormatter formatter = config.Formatters.JsonFormatter;
+			formatter.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+
 			var oAuthServerOptions = new OAuthAuthorizationServerOptions()
 			{
 				AllowInsecureHttp = true,
@@ -64,6 +70,7 @@ namespace BaseSPA.Web
 			app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
 
 			app.UseWebApi(config);
+
 		}
 	}
 }

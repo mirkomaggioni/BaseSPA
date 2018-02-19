@@ -3,12 +3,16 @@
     <label for="name">Name</label>
     <input type="text" class="form-control" id="name" name="name" placeholder="Name" ng-model="Blog.Name" required>
   </div>
-    <div class="form-group">
-        <label for="url">Url</label>
-        <input type="text" class="form-control" id="url" name="url" placeholder="Url" ng-model="Blog.Url" required>
-    </div>
-	
-    <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="!form.$valid">Save</button>
-	<button type="button" class="btn btn-danger" ng-disabled="!form.$valid || Blog.Id == undefined" ng-click="delete()">Delete</button>
-	<button type="button" class="btn btn-default" ng-click="close()">Close</button>
+  <div class="form-group">
+    <label for="url">Url</label>
+    <input type="text" class="form-control" id="url" name="url" placeholder="Url" ng-model="Blog.Url" required>
+  </div>
+  <div class="form-group">
+    <label for="date">Date</label>
+    <input type="text" class="form-control" id="date" name="date" placeholder="date" ng-model="Blog.Date">
+  </div>
+
+  <button type="button" class="btn btn-primary" ng-click="save()" ng-disabled="!form.$valid">Save</button>
+  <button type="button" class="btn btn-danger" ng-disabled="!form.$valid || Blog.Id == undefined" ng-click="delete()">Delete</button>
+  <button type="button" class="btn btn-default" ng-click="close()">Close</button>
 </form>

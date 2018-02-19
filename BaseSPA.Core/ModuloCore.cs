@@ -2,6 +2,7 @@
 
 namespace BaseSPA.Core
 {
+
 	public class ModuloCore : Module
 	{
 		protected override void Load(ContainerBuilder builder)
